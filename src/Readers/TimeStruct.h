@@ -35,9 +35,8 @@ namespace ssp
             time = CreateTime(yeari, monthi, dayi, houri, minutei, secondi);
             return true;
         }
-        catch(std::invalid_argument& err)
+        catch(std::invalid_argument)
         {
-            err;
             std::cout << "Date/time conversion failed\n";
             return false;
         }

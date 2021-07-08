@@ -52,15 +52,19 @@ bool ParseTsvHeader(std::string line, SCast& cast)
         return false;
     }
 
-    cast.lat = std::stod(matches[7]);
-    cast.lon = std::stod(matches[8]);
-
-    std::cout << matches.size() << "\n";
-    for (size_t n = 0; n < matches.size(); ++n)
-        std::cout << matches[n].str() << "\n";
-
     if (!CreateTime(matches[1], matches[2], matches[3], matches[4], matches[5], matches[6], cast.time))
         return false;
+
+    try
+    {
+        cast.lat = std::stod(matches[7]);
+        cast.lon = std::stod(matches[8]);
+    }
+    catch (std::invalid_argument)
+    {
+        std::cout << "Invalid latitude/longitude strings\n";
+        return false;
+    }
 
     return true;
 }
@@ -92,7 +96,7 @@ std::optional<SCast> ReadSeaBirdTsv(const std::string& fileName)
             if (line.size() == 0)
                 break;
 
-            // The depth and sound speed are required fields...
+            // The depth and sound speed are required fields
             std::stringstream ss(line);
             SCastEntry entry;
             ss >> entry.depth >> entry.c;
