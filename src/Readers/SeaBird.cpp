@@ -42,11 +42,11 @@ std::optional<SCast> ReadSeaBirdCnv(const std::string& fileName)
 bool ParseTsvHeader(std::string line, SCast& cast)
 {
     // Header string format: "## DATE:yyyy-mm-ddThh:mm:ss\tLATITUDE:xx.xx\tLONGITUDE:xx.xx"
-    std::regex rgx("## DATE:([0-9]+)-([0-9]+)-([0-9]+)T([0-9])+:([0-9])+:([0-9]+).*LATITUDE:(.?[0-9]+.[0-9]+).*LONGITUDE:(.?[0-9]+.[0-9]+)");
+    std::regex rgx("## DATE:([0-9]+)-([0-9]+)-([0-9]+)T([0-9])+:([0-9])+:([0-9]+).*LATITUDE:([+-]?([0-9]*[.])?[0-9]+).*LONGITUDE:([+-]?([0-9]*[.])?[0-9]+)");
     std::smatch matches;
     std::regex_search(line, matches, rgx);
 
-    if (matches.size() != 9)
+    if (matches.size() != 11)
     {
         std::cout << "Sea-Bird .tsv has incorrect header\n";
         return false;
@@ -58,7 +58,7 @@ bool ParseTsvHeader(std::string line, SCast& cast)
     try
     {
         cast.lat = std::stod(matches[7]);
-        cast.lon = std::stod(matches[8]);
+        cast.lon = std::stod(matches[9]);
     }
     catch (std::invalid_argument)
     {
