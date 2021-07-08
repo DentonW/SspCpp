@@ -72,19 +72,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\ProgramData\Anaconda3\pkgs\numpy-base-1.19.2-py38ha3acd2a_0\Lib\site-packages\numpy\core\include;C:\ProgramData\Anaconda3\pkgs\python-3.8.5-h5fd99cc_1\include;F:\Coding\Libraries\matplotlib-cpp-master;F:\Coding\Libraries\fmt\include;src;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>src;F:\Coding\Libraries\date\include;C:\ProgramData\Anaconda3\pkgs\numpy-base-1.19.2-py38ha3acd2a_0\Lib\site-packages\numpy\core\include;C:\ProgramData\Anaconda3\pkgs\python-3.8.5-h5fd99cc_1\include;F:\Coding\Libraries\matplotlib-cpp-master;F:\Coding\Libraries\fmt\include;src;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\ProgramData\Anaconda3\pkgs\numpy-base-1.19.2-py38ha3acd2a_0\Lib\site-packages\numpy\core\include;C:\ProgramData\Anaconda3\pkgs\python-3.8.5-h5fd99cc_1\include;F:\Coding\Libraries\matplotlib-cpp-master;F:\Coding\Libraries\fmt\include;src;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>src;F:\Coding\Libraries\date\include;C:\ProgramData\Anaconda3\pkgs\numpy-base-1.19.2-py38ha3acd2a_0\Lib\site-packages\numpy\core\include;C:\ProgramData\Anaconda3\pkgs\python-3.8.5-h5fd99cc_1\include;F:\Coding\Libraries\matplotlib-cpp-master;F:\Coding\Libraries\fmt\include;src;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\ProgramData\Anaconda3\pkgs\numpy-base-1.19.2-py38ha3acd2a_0\Lib\site-packages\numpy\core\include;C:\ProgramData\Anaconda3\pkgs\python-3.8.5-h5fd99cc_1\include;F:\Coding\Libraries\matplotlib-cpp-master;F:\Coding\Libraries\fmt\include;src;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>src;F:\Coding\Libraries\date\include;C:\ProgramData\Anaconda3\pkgs\numpy-base-1.19.2-py38ha3acd2a_0\Lib\site-packages\numpy\core\include;C:\ProgramData\Anaconda3\pkgs\python-3.8.5-h5fd99cc_1\include;F:\Coding\Libraries\matplotlib-cpp-master;F:\Coding\Libraries\fmt\include;src;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\ProgramData\Anaconda3\pkgs\numpy-base-1.19.2-py38ha3acd2a_0\Lib\site-packages\numpy\core\include;C:\ProgramData\Anaconda3\pkgs\python-3.8.5-h5fd99cc_1\include;F:\Coding\Libraries\matplotlib-cpp-master;F:\Coding\Libraries\fmt\include;src;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>src;F:\Coding\Libraries\date\include;C:\ProgramData\Anaconda3\pkgs\numpy-base-1.19.2-py38ha3acd2a_0\Lib\site-packages\numpy\core\include;C:\ProgramData\Anaconda3\pkgs\python-3.8.5-h5fd99cc_1\include;F:\Coding\Libraries\matplotlib-cpp-master;F:\Coding\Libraries\fmt\include;src;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -93,6 +93,7 @@
       <PreprocessorDefinitions>MATPLOTLIB_CPP_SUPPORT;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -108,6 +109,7 @@
       <PreprocessorDefinitions>MATPLOTLIB_CPP_SUPPORT;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -124,6 +126,7 @@
       <PreprocessorDefinitions>MATPLOTLIB_CPP_SUPPORT;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,6 +143,7 @@
       <PreprocessorDefinitions>MATPLOTLIB_CPP_SUPPORT;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -158,6 +162,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ClCompile Include="src\Readers\SeaBird.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\Readers\Sonardyne.cpp">
@@ -184,6 +198,7 @@
   <ItemGroup>
     <ClInclude Include="src\Cast.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\Readers\SeaBird.h" />
     <ClInclude Include="src\Readers\Sonardyne.h" />
     <ClInclude Include="src\Readers\TimeStruct.h" />
     <ClInclude Include="src\SoundSpeed.h" />

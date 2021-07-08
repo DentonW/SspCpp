@@ -1,6 +1,8 @@
 #pragma once
 
 #include <ctime>
+#include <string>
+
 
 namespace ssp
 {
@@ -17,5 +19,27 @@ namespace ssp
         mktime(&time);  // Fills in the rest of the members (day of the week, etc.)
 
         return time;
+    }
+
+    inline bool CreateTime(std::string year, std::string month, std::string day, std::string hour, std::string minute, std::string second, std::tm& time)
+    {
+        try
+        {
+            int yeari = std::stoi(year);
+            int monthi = std::stoi(month);
+            int dayi = std::stoi(day);
+            int houri = std::stoi(hour);
+            int minutei = std::stoi(minute);
+            int secondi = std::stoi(second);
+
+            time = CreateTime(yeari, monthi, dayi, houri, minutei, secondi);
+            return true;
+        }
+        catch(std::invalid_argument& err)
+        {
+            err;
+            std::cout << "Date/time conversion failed\n";
+            return false;
+        }
     }
 };

@@ -7,7 +7,7 @@
 #include <sstream>
 #include <vector>
 #include <fmt/format.h>
-#include "../Cast.h"
+#include "Cast.h"
 #include "TimeStruct.h"
 
 
@@ -83,6 +83,8 @@ std::optional<ssp::SCast> ssp::ReadSonardyne(const std::string& fileName)
                 }
             }
 
+            entry.absorp = 0;
+
             entries.push_back(entry);
         }
     }
@@ -91,6 +93,11 @@ std::optional<ssp::SCast> ssp::ReadSonardyne(const std::string& fileName)
         std::cout << "Error reading Sonardyne file (" << fileName << "): " << err << "\n";
         return {};
     }
+
+    cast.lat = 0;
+    cast.lon = 0;
+    cast.desc = "Sonardyne";
+    cast.fileName = fileName;
 
     return cast;
 }

@@ -13,8 +13,10 @@
 #endif
 
 #include "Cast.h"
-#include "Readers/SonarDyne.h"
-#include "src\SoundSpeed.h"
+#include "SoundSpeed.h"
+
+#include "Readers/SeaBird.h"
+#include "Readers/Sonardyne.h"
 
 
 std::vector<std::string> SplitString(std::string str)
@@ -63,16 +65,25 @@ bool PlotData(const SCast& cast)
 
 int main()
 {
-    auto sspSonardyne1 = ssp::ReadSonardyne("F:/Coding/hyo2_soundspeed/data/input/sonardyne/_Demo1.pro");
+    auto sspSonardyne1 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/sonardyne/_Demo1.pro", ssp::eCastType::Sonardyne);
     if (!sspSonardyne1)
         return 1;
-    PlotCast(*sspSonardyne1);
+    //PlotCast(*sspSonardyne1);
 
-    auto sspSonardyne2 = ssp::ReadSonardyne("F:/Coding/hyo2_soundspeed/data/input/sonardyne/Demo2.pro");
+    auto sspSonardyne2 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/sonardyne/Demo2.pro", ssp::eCastType::Sonardyne);
     if (!sspSonardyne2)
         return 1;
-    PlotCast(*sspSonardyne2);
+    //PlotCast(*sspSonardyne2);
 
+    auto sspSeaBird1 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seabird/_H1662.SVP.sampled.ascent.tsv", ssp::eCastType::SeaBird);
+    if (!sspSeaBird1)
+        return 1;
+    PlotCast(*sspSeaBird1);
+
+    auto sspSeaBird2 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seabird/_H1662.SVP.sampled.ascent.with_temp_and_sal.tsv", ssp::eCastType::SeaBird);
+    if (!sspSeaBird2)
+        return 1;
+    PlotCast(*sspSeaBird2);
 
     return 0;
 }
@@ -82,6 +93,9 @@ std::optional<ssp::SCast> ssp::ReadCast(const std::string& fileName, eCastType t
 {
     switch (type)
     {
+        case eCastType::SeaBird:
+            return ReadSeaBird(fileName);
+
         case eCastType::Sonardyne:
             return ReadSonardyne(fileName);
 
