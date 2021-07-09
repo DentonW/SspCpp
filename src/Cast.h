@@ -7,6 +7,7 @@ namespace ssp
 {
     struct SCastEntry
     {
+        SCastEntry() { depth = 0; c = 0; temp = 0; salinity = 0; absorp = 0; }
         double depth;  //!< Depth in meters
         double c;      //!< Sound speed in meters/second
         double temp;   //!< Temperature in degrees Celsius

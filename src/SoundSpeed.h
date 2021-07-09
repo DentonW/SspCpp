@@ -8,7 +8,8 @@ namespace ssp
 {
     enum class eCastType
     {
-        SeaBird,
+        SeaBirdCnv,
+        SeaBirdTsv,
         Sonardyne,
         Unknown
     };

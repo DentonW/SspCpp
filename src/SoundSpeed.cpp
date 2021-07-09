@@ -14,6 +14,7 @@
 
 #include "Cast.h"
 #include "SoundSpeed.h"
+#include "Checks.h"
 
 #include "Readers/SeaBird.h"
 #include "Readers/Sonardyne.h"
@@ -75,15 +76,31 @@ int main()
         return 1;
     //PlotCast(*sspSonardyne2);
 
-    auto sspSeaBird1 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seabird/_H1662.SVP.sampled.ascent.tsv", ssp::eCastType::SeaBird);
+    auto sspSeaBird1 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seabird/_H1662.SVP.sampled.ascent.tsv", ssp::eCastType::SeaBirdTsv);
     if (!sspSeaBird1)
         return 1;
-    PlotCast(*sspSeaBird1);
+    //PlotCast(*sspSeaBird1);
 
-    auto sspSeaBird2 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seabird/_H1662.SVP.sampled.ascent.with_temp_and_sal.tsv", ssp::eCastType::SeaBird);
+    auto sspSeaBird2 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seabird/_H1662.SVP.sampled.ascent.with_temp_and_sal.tsv", ssp::eCastType::SeaBirdTsv);
     if (!sspSeaBird2)
         return 1;
-    PlotCast(*sspSeaBird2);
+    //PlotCast(*sspSeaBird2);
+
+    //auto sspSeaBird3 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seabird/_2013_192_124923test.cnv", ssp::eCastType::SeaBirdCnv);
+    //if (!sspSeaBird3)
+    //    return 1;
+    ////PlotCast(*sspSeaBird3);
+    //Reorder(*sspSeaBird3);
+    //RemoveNegativeDepths(*sspSeaBird3);
+
+    auto sspSeaBird4 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seabird/FK001_CTD02.cnv", ssp::eCastType::SeaBirdCnv);
+    if (!sspSeaBird4)
+        return 1;
+    
+    auto sspSeaBird5 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seabird/EX1811_DIVE01_20181031_ROVCTD.cnv", ssp::eCastType::SeaBirdCnv);
+    if (!sspSeaBird5)
+        return 1;
+
 
     return 0;
 }
@@ -93,8 +110,11 @@ std::optional<ssp::SCast> ssp::ReadCast(const std::string& fileName, eCastType t
 {
     switch (type)
     {
-        case eCastType::SeaBird:
-            return ReadSeaBird(fileName);
+        case eCastType::SeaBirdCnv:
+            return ReadSeaBirdCnv(fileName);
+
+        case eCastType::SeaBirdTsv:
+            return ReadSeaBirdTsv(fileName);
 
         case eCastType::Sonardyne:
             return ReadSonardyne(fileName);
