@@ -12,9 +12,8 @@
 #include <date/date.h>
 #include <fmt/format.h>
 #include "Cast.h"
+#include "StringUtilities.h"
 #include "TimeStruct.h"
-
-std::vector<std::string> SplitString(std::string str);
 
 
 namespace ssp

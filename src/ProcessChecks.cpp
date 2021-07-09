@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Checks.h"
+#include "ProcessChecks.h"
 #include <algorithm>
 
 
@@ -18,6 +18,15 @@ void ssp::RemoveNegativeDepths(SCast& cast)
 }
 
 
+void ssp::RemoveDuplicateDepths(SCast& cast)
+{
+    Reorder(cast);  // Data must be sorted first!
+    auto iter = std::unique(begin(cast.entries), end(cast.entries), [](SCastEntry& left, SCastEntry& right) { return left.depth == right.depth; });
+    cast.entries.erase(iter, end(cast.entries));
+    return;
+}
+
+
 bool ssp::CheckLatLon(SCast& cast)
 {
     if (cast.lat < -90 || cast.lat > 90)
@@ -26,4 +35,10 @@ bool ssp::CheckLatLon(SCast& cast)
         return false;
 
     return true;
+}
+
+
+bool ssp::CheckLimits(const SCast& cast)
+{
+    return false;
 }

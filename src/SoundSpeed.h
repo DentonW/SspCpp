@@ -15,4 +15,8 @@ namespace ssp
     };
 
     std::optional<SCast> ReadCast(const std::string& fileName, eCastType type = eCastType::Unknown);
+
+    bool PlotCast(const ssp::SCast& cast);
+
+    double SoundSpeedWongZhu(double temp, double salin, double pressure);
 };
