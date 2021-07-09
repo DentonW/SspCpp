@@ -96,10 +96,18 @@ int main()
     auto sspSeaBird4 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seabird/FK001_CTD02.cnv", ssp::eCastType::SeaBirdCnv);
     if (!sspSeaBird4)
         return 1;
+    PlotCast(*sspSeaBird4);
     
+    // This one does not load (sound speed not present)
     auto sspSeaBird5 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seabird/EX1811_DIVE01_20181031_ROVCTD.cnv", ssp::eCastType::SeaBirdCnv);
-    if (!sspSeaBird5)
+    //if (!sspSeaBird5)
+    //    return 1;
+
+    auto sspSeaBird6 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seabird/ITF17019.cnv", ssp::eCastType::SeaBirdCnv);
+    if (!sspSeaBird6)
         return 1;
+    Reorder(*sspSeaBird6);
+    PlotCast(*sspSeaBird6);
 
 
     return 0;
