@@ -166,6 +166,7 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <ClCompile Include="src\ProcessChecks.cpp" />
+    <ClCompile Include="src\Readers\Asvp.cpp" />
     <ClCompile Include="src\Readers\SeaBird.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">pch.h</PrecompiledHeaderFile>
@@ -201,6 +202,7 @@
     <ClInclude Include="src\Cast.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\ProcessChecks.h" />
+    <ClInclude Include="src\Readers\Asvp.h" />
     <ClInclude Include="src\Readers\SeaBird.h" />
     <ClInclude Include="src\Readers\Sonardyne.h" />
     <ClInclude Include="src\Readers\TimeStruct.h" />

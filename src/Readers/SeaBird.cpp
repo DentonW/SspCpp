@@ -288,8 +288,6 @@ std::optional<SCast> ReadSeaBirdTsv(const std::string& fileName)
                 entry.salinity = 0;
             }
 
-            entry.absorp = 0;
-
             entries.push_back(entry);
         }
     }

@@ -83,8 +83,6 @@ std::optional<ssp::SCast> ssp::ReadSonardyne(const std::string& fileName)
                 }
             }
 
-            entry.absorp = 0;
-
             entries.push_back(entry);
         }
     }
