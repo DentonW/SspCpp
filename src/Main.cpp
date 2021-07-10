@@ -5,6 +5,11 @@
 
 int main()
 {
+    auto sspSeaSun1 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seaandsun/_87201650_10.tob", ssp::eCastType::SeaAndSun);
+    if (!sspSeaSun1)
+        return 1;
+    PlotCast(*sspSeaSun1);
+
     auto sspAsvp1 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/asvp/_20120321_224205.asvp", ssp::eCastType::Asvp);
     if (!sspAsvp1)
         return 1;

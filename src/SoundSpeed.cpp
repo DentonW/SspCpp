@@ -19,6 +19,7 @@
 #include "SoundSpeed.h"
 
 #include "Readers/Asvp.h"
+#include "Readers/SeaAndSun.h"
 #include "Readers/SeaBird.h"
 #include "Readers/Sonardyne.h"
 
@@ -62,6 +63,9 @@ std::optional<SCast> ReadCast(const std::string& fileName, eCastType type)
     {
         case eCastType::Asvp:
             return ReadAsvp(fileName);
+
+        case eCastType::SeaAndSun:
+            return ReadSeaAndSun(fileName);
 
         case eCastType::SeaBirdCnv:
             return ReadSeaBirdCnv(fileName);

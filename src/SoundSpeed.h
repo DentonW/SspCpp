@@ -9,6 +9,7 @@ namespace ssp
     enum class eCastType
     {
         Asvp,  // Kongsberg Maritime (.asvp)
+        SeaAndSun,  // .tob
         SeaBirdCnv,
         SeaBirdTsv,
         Sonardyne,
