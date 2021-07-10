@@ -18,5 +18,5 @@ namespace ssp
 
     bool PlotCast(const ssp::SCast& cast);
 
-    double SoundSpeedWongZhu(double temp, double salin, double pressure);
+    double WongZhu(double temp, double salin, double pressure);
 };

@@ -3,8 +3,20 @@
 #include "SoundSpeed.h"
 
 
+void TestSSPCalc()
+{
+    double temp = 20;
+    double salin = 35;
+    double pressure = 0;
+    double c = ssp::SoundSpeedWongZhu(temp, salin, pressure);
+    return;
+}
+
+
 int main()
 {
+    TestSSPCalc();
+
     auto sspSonardyne1 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/sonardyne/_Demo1.pro", ssp::eCastType::Sonardyne);
     if (!sspSonardyne1)
         return 1;
