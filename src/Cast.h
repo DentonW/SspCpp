@@ -7,11 +7,12 @@ namespace ssp
 {
     struct SCastEntry
     {
-        SCastEntry() { depth = 0; c = 0; temp = 0; salinity = 0; absorp = 0; }
+        SCastEntry() { depth = 0; c = 0; temp = 0; salinity = 0; pressure = 0; absorp = 0; }
         double depth;  //!< Depth in meters
         double c;      //!< Sound speed in meters/second
         double temp;   //!< Temperature in degrees Celsius
         double salinity;  //!< Salinity in parts per thousand (ppt)
+        double pressure;  //!< Usually expressed as depth (bars???)
         double absorp;  //!< Absorption /// @todo: Do any casts typically have this?
     };
 

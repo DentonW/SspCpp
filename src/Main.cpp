@@ -5,7 +5,11 @@
 
 int main()
 {
-    auto sspSeaSun1 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seaandsun/_87201650_10.tob", ssp::eCastType::SeaAndSun);
+    double pDbar = 10.1325;  // 1 atm
+    std::cout << ssp::Depth(pDbar, 0) << "\n";
+
+
+    auto sspSeaSun1 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seaandsun/1608240753.tob", ssp::eCastType::SeaAndSun);
     if (!sspSeaSun1)
         return 1;
     PlotCast(*sspSeaSun1);

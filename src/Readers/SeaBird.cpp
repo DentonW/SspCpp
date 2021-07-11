@@ -161,7 +161,7 @@ std::optional<SCast> ReadSeaBirdCnv(const std::string& fileName)
             tempPos = pos;
 
         // Move past the found string to continue searching
-        headSub = match.suffix().str();
+        headSub = match.suffix();
     }
 
     /// @todo: Calculate sound speed from the other parameters (if depth is present)
