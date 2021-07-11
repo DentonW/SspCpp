@@ -8,6 +8,11 @@ int main()
     double pDbar = 10.1325;  // 1 atm
     std::cout << ssp::Depth(pDbar, 0) << "\n";
 
+    auto sspSeaBird7 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seabird/007_201605262145_CTD-SB_CON_BIN_DER.cnv", ssp::eCastType::SeaBirdCnv);
+    if (!sspSeaBird7)
+        return 1;
+    ssp::RemoveNegativeSpeeds(*sspSeaBird7);  // This file has one line with bad data (sound speed of -9.990e-29)
+    PlotCast(*sspSeaBird7);
 
     auto sspSeaSun1 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seaandsun/1608240753.tob", ssp::eCastType::SeaAndSun);
     if (!sspSeaSun1)
@@ -62,6 +67,11 @@ int main()
     Reorder(*sspSeaBird6);
     RemoveDuplicateDepths(*sspSeaBird6);
     PlotCast(*sspSeaBird6);
+
+    //auto sspSeaBird7 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seabird/007_201605262145_CTD-SB_CON_BIN_DER.cnv", ssp::eCastType::SeaBirdCnv);
+    //if (!sspSeaBird7)
+    //    return 1;
+    ////PlotCast(*sspSeaBird7);
 
     return 0;
 }

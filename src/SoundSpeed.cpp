@@ -43,6 +43,8 @@ bool PlotCast(const SCast& cast)
     }
 
     plt::plot(c, depth);
+    plt::xlabel("Sound speed (m/s)");
+    plt::ylabel("Depth (m)");
     plt::ylim(depth.back(), depth.front());
     plt::show();
 

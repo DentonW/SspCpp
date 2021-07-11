@@ -18,6 +18,14 @@ void ssp::RemoveNegativeDepths(SCast& cast)
 }
 
 
+void ssp::RemoveNegativeSpeeds(SCast& cast)
+{
+    auto removeIter = std::remove_if(begin(cast.entries), end(cast.entries), [](SCastEntry& entry) { return entry.c < 0; });
+    cast.entries.erase(removeIter, end(cast.entries));
+    return;
+}
+
+
 void ssp::RemoveDuplicateDepths(SCast& cast)
 {
     Reorder(cast);  // Data must be sorted first!

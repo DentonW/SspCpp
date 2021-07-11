@@ -6,6 +6,7 @@ namespace ssp
 {
     void Reorder(SCast& cast);
     void RemoveNegativeDepths(SCast& cast);
+    void RemoveNegativeSpeeds(SCast& cast);
 
     /*! Removes entries with the same depth
      *

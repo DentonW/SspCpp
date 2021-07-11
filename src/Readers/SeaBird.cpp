@@ -12,6 +12,7 @@
 #include <date/date.h>
 #include <fmt/format.h>
 #include "Cast.h"
+#include "SoundSpeed.h"
 #include "StringUtilities.h"
 #include "TimeStruct.h"
 
@@ -48,7 +49,7 @@ bool ParseCnvTime(std::string header, SCast& cast)
 }
 
 
-bool ParseLatLon(std::string header, SCast& cast)
+bool ParseLatLon1(std::string header, SCast& cast)
 {
     std::smatch match;
 
@@ -97,6 +98,74 @@ bool ParseLatLon(std::string header, SCast& cast)
 }
 
 
+bool ParseLatLon2(std::string header, SCast& cast)
+{
+    std::smatch match;
+
+    // Parse latitude string
+    std::regex rgxLat(R"(\*\* Lat:[ ]*([0-9]+);([0-9]+);([0-9]+[.][0-9]+) ([NS]))");
+    std::regex_search(header, match, rgxLat);
+    if (match.size() != 5)
+        return false;
+
+    std::string latDegStr  = match[1];
+    std::string latMinStr  = match[2];
+    std::string latSecStr  = match[3];
+    std::string NorthSouth = match[4];
+
+    int latDeg = std::stoi(latDegStr);
+    int latMin = std::stoi(latMinStr);
+    double latSec = std::stod(latSecStr);
+    double lat = latDeg + latMin / 60.0 + latSec / 3600.0;
+
+    if (NorthSouth == "S")
+        lat = -lat;
+    cast.lat = lat;
+
+    // Parse longitude string
+    std::regex rgxLon(R"(\*\* Lon:[ ]*([0-9]+);([0-9]+);([0-9]+[.][0-9]+) ([EW]))");
+    std::regex_search(header, match, rgxLon);
+    if (match.size() != 5)
+        return false;
+
+    std::string lonDegStr = match[1];
+    std::string lonMinStr = match[2];
+    std::string lonSecStr = match[3];
+    std::string EastWest  = match[4];
+
+    int lonDeg = std::stoi(lonDegStr);
+    int lonMin = std::stoi(lonMinStr);
+    double lonSec = std::stod(lonSecStr);
+    double lon = lonDeg + lonMin / 60.0 + lonSec / 3600.0;
+
+    if (EastWest == "W")
+        lon = -lon;
+    cast.lon = lon;
+
+    return true;
+}
+
+
+bool ParseLatLon(std::string header, SCast& cast)
+{
+    try
+    {
+        // There are two different ways that lat/lon can be specified, so try both.
+        if (ParseLatLon1(header, cast))
+            return true;
+        if (ParseLatLon2(header, cast))
+            return true;
+    }
+    catch (std::invalid_argument)
+    {
+        std::cout << "Invalid or missing latitude/longitude strings\n";
+        return {};
+    }
+
+    return false;
+}
+
+
 std::optional<SCast> ReadSeaBirdCnv(const std::string& fileName)
 {
     std::ifstream inFile(fileName);
@@ -132,8 +201,8 @@ std::optional<SCast> ReadSeaBirdCnv(const std::string& fileName)
 
     // This can have different sensors, and they can likely be on any channel. Here we have to determine from
     //  the header where the information we are interested in is.
-    int depthPos = -1, speedPos = -1, salinPos = -1, tempPos = -1;
-    std::regex rgx("# name ([0-9]+) = ([a-zA-Z0-9]+): ([a-zA-Z]+)");
+    int depthPos = -1, speedPos = -1, salinPos = -1, tempPos = -1, pressurePos = -1;
+    std::regex rgx("# name ([0-9]+) = ([a-zA-Z0-9/]+): ([a-zA-Z]+)");
     std::smatch match;
     std::string headSub = header;
 
@@ -159,6 +228,8 @@ std::optional<SCast> ReadSeaBirdCnv(const std::string& fileName)
             salinPos = pos;
         else if (sensorType == "Temperature")
             tempPos = pos;
+        else if (sensorType == "Pressure")
+            pressurePos = pos;
 
         // Move past the found string to continue searching
         headSub = match.suffix();
@@ -179,12 +250,12 @@ std::optional<SCast> ReadSeaBirdCnv(const std::string& fileName)
 
     /// @todo: May want to do something with the "# nvalues =" line
 
+    int lineNum = 0;
     while (std::getline(inFile, line))
     {
+        lineNum++;
         if (line.size() == 0)
             break;
-
-        //std::cout << line << "\n";
 
         auto lineStrings = SplitString(line);
         
@@ -193,21 +264,22 @@ std::optional<SCast> ReadSeaBirdCnv(const std::string& fileName)
             SCastEntry entry;
             entry.depth = std::stod(lineStrings[depthPos]);
             entry.c = std::stod(lineStrings[speedPos]);
+
             if (salinPos != -1)
                 entry.salinity = std::stod(lineStrings[salinPos]);
             if (tempPos != -1)
                 entry.temp = std::stod(lineStrings[tempPos]);
+            if (pressurePos != -1)
+                entry.pressure = std::stod(lineStrings[pressurePos]);
 
             entries.push_back(entry);
         }
         catch (std::invalid_argument)
         {
-            std::cout << "Invalid latitude/longitude strings\n";
+            std::cout << "Invalid entry #" << entries.size() << "\n";
             return {};
         }
     }
-
-    /// @ todo: Get latitude and longitude
 
     cast.desc = "Sea-Bird CNV";
     cast.fileName = fileName;
