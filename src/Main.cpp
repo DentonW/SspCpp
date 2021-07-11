@@ -11,7 +11,8 @@ int main()
     auto sspSeaBird7 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seabird/007_201605262145_CTD-SB_CON_BIN_DER.cnv", ssp::eCastType::SeaBirdCnv);
     if (!sspSeaBird7)
         return 1;
-    ssp::RemoveNegativeSpeeds(*sspSeaBird7);  // This file has one line with bad data (sound speed of -9.990e-29)
+    //ssp::RemoveNegativeSpeeds(*sspSeaBird7);  // This file has one line with bad data (sound speed of -9.990e-29)
+    Cleanup(*sspSeaBird7);
     PlotCast(*sspSeaBird7);
 
     auto sspSeaSun1 = ssp::ReadCast("F:/Coding/hyo2_soundspeed/data/input/seaandsun/1608240753.tob", ssp::eCastType::SeaAndSun);

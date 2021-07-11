@@ -27,6 +27,20 @@
 namespace ssp
 {
 
+template <class T>
+T min_vec(const std::vector<T>& v)
+{
+    return *std::min_element(begin(v), end(v));
+}
+
+template <class T>
+T max_vec(const std::vector<T>& v)
+{
+    return *std::max_element(begin(v), end(v));
+}
+
+
+
 #ifdef MATPLOTLIB_CPP_SUPPORT
 bool PlotCast(const SCast& cast)
 {
@@ -45,7 +59,7 @@ bool PlotCast(const SCast& cast)
     plt::plot(c, depth);
     plt::xlabel("Sound speed (m/s)");
     plt::ylabel("Depth (m)");
-    plt::ylim(depth.back(), depth.front());
+    plt::ylim(max_vec(depth), min_vec(depth));
     plt::show();
 
     return true;
