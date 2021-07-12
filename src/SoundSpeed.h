@@ -33,16 +33,22 @@
 #include <string>
 #include "Cast.h"
 
+#define SSP_WORLD_VERSION 0
+#define SSP_MAJOR_VERSION 0
+#define SSP_MINOR_VERSION 1
+#define SSP_STRING_VERSION "0.0.1"
+
 namespace ssp
 {
+    //! 
     enum class eCastType
     {
-        Asvp,  // Kongsberg Maritime (.asvp)
-        SeaAndSun,  // .tob
-        SeaBirdCnv,
-        SeaBirdTsv,
-        Sonardyne,
-        Unknown
+        Asvp,  //!< Kongsberg Maritime (.asvp)
+        SeaAndSun,  //!< .tob
+        SeaBirdCnv,  //!< 
+        SeaBirdTsv,  //!< 
+        Sonardyne,  //!< 
+        Unknown  //!< 
     };
 
     std::optional<SCast> ReadCast(const std::string& fileName, eCastType type = eCastType::Unknown);
@@ -55,7 +61,7 @@ namespace ssp
 
     double Gravity(double latitudeDeg);
 
-    /*! From Leroyand Parthiot, "Depth-pressure relationships in the oceans and seas"
+    /*! From Leroy and Parthiot, "Depth-pressure relationships in the oceans and seas"
      *   https://doi.org/10.1121/1.421275
      */
     double Depth(double pressureDBar, double latitudeDeg);
