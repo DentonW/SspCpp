@@ -42,7 +42,7 @@
 #include <fmt/format.h>
 #include <SspCpp/SoundSpeed.h>
 #include "../StringUtilities.h"
-#include "TimeStruct.h"
+#include "../TimeStruct.h"
 
 
 namespace ssp

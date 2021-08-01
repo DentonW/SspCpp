@@ -37,7 +37,7 @@
 #include <vector>
 #include <fmt/format.h>
 #include <SspCpp/Cast.h>
-#include "TimeStruct.h"
+#include "../TimeStruct.h"
 
 
 std::optional<ssp::SCast> ssp::ReadSonardyne(const std::string& fileName)
