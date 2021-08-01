@@ -1,4 +1,4 @@
-[![CMake](https://github.com/DentonW/SspCpp/actions/workflows/cmake.yml/badge.svg)](https://github.com/DentonW/SspCpp/actions/workflows/cmake.yml)
+[![Windows](https://github.com/DentonW/SspCpp/actions/workflows/windows.yml/badge.svg)](https://github.com/DentonW/SspCpp/actions/workflows/windows.yml)
 
 # SspCpp: A C++ Underwater Sound Speed Profile File Reader Library
 
