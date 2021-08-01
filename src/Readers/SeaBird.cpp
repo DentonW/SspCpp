@@ -40,8 +40,7 @@
 #include <vector>
 #include <date/date.h>
 #include <fmt/format.h>
-#include "Cast.h"
-#include "SoundSpeed.h"
+#include <SspCpp/SoundSpeed.h>
 #include "../StringUtilities.h"
 #include "TimeStruct.h"
 

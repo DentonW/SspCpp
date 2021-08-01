@@ -44,9 +44,9 @@
     #endif
 #endif
 
-#include "Cast.h"
-#include "ProcessChecks.h"
-#include "SoundSpeed.h"
+#include <SspCpp/Cast.h>
+#include <SspCpp/ProcessChecks.h>
+#include <SspCpp/SoundSpeed.h>
 
 #include "Readers/Asvp.h"
 #include "Readers/SeaAndSun.h"

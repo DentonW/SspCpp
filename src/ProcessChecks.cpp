@@ -31,7 +31,7 @@
   */
 
 #include "pch.h"
-#include "ProcessChecks.h"
+#include <SspCpp/ProcessChecks.h>
 #include <algorithm>
 
 

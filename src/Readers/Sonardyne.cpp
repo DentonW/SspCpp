@@ -36,7 +36,7 @@
 #include <sstream>
 #include <vector>
 #include <fmt/format.h>
-#include "Cast.h"
+#include <SspCpp/Cast.h>
 #include "TimeStruct.h"
 
 

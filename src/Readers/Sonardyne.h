@@ -32,7 +32,7 @@
 #include <optional>
 #include <string>
 #include <vector>
-#include "Cast.h"
+#include <SspCpp/Cast.h>
 
 namespace ssp
 {

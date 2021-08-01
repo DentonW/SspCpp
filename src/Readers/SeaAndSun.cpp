@@ -32,7 +32,7 @@
 #include <array>
 #include <fstream>
 #include <regex>
-#include "SoundSpeed.h"
+#include "SspCpp/SoundSpeed.h"
 #include "../StringUtilities.h"
 #include "TimeStruct.h"
 

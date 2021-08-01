@@ -10,7 +10,7 @@ project(SspExample LANGUAGES CXX)
 
 include(../cmake/CPM.cmake)
 
-CPMAddPackage(NAME SspCpp SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+#CPMAddPackage(NAME SspCpp SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/../src)
 
 # ---- Create standalone executable ----
 

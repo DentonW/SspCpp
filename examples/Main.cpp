@@ -1,6 +1,7 @@
 //#include "pch.h"
 #include <iostream>
-#include "SoundSpeed.h"
+//#include "../include/SspCpp/SoundSpeed.h"
+#include <SspCpp/SoundSpeed.h>
 
 
 int main()

@@ -28,7 +28,7 @@
  */
 
 #include "pch.h"
-#include "SoundSpeed.h"
+#include <SspCpp/SoundSpeed.h>
 #include <cmath>
 
 
