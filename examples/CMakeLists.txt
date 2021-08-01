@@ -11,6 +11,13 @@ project(SspExample LANGUAGES CXX)
 include(../cmake/CPM.cmake)
 
 #CPMAddPackage(NAME SspCpp SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/../src)
+CPMAddPackage("gh:hydroffice/hyo2_soundspeed#2021.1.7")
+#message(STATUS "hyo2: ${FETCHCONTENT_SOURCE_DIR_HYO2_SOUNDSPEED}")
+
+set(HYO2_LOC "${FETCHCONTENT_BASE_DIR}/hyo2_soundspeed-src/data/input/")
+file(WRITE hyo2_location.h
+     "#pragma once\n\nconst char* HYO2_LOC = \"${HYO2_LOC}\";\n"
+)
 
 # ---- Create standalone executable ----
 

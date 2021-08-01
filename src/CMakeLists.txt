@@ -9,16 +9,6 @@ project(
   LANGUAGES CXX
 )
 
-# ---- Include guards ----
-
-if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-  message(
-    FATAL_ERROR
-      "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
-  )
-endif()
-
-
 # ---- Set options ----
 # (Needed before CPM calls)
 #option(SSP_MATPLOTLIB_CPP_SUPPORT "Use matplotlib-cpp for plotting" OFF)
@@ -57,11 +47,11 @@ set(headers
     ../include/SspCpp/ProcessChecks.h
     ../include/SspCpp/SoundSpeed.h
     StringUtilities.h
+    TimeStruct.h
     Readers/Asvp.h
     Readers/SeaAndSun.h
     Readers/SeaBird.h
     Readers/Sonardyne.h
-    Readers/TimeStruct.h
 )
 
 set(sources
@@ -80,6 +70,7 @@ if (CMAKE_GENERATOR MATCHES "Visual Studio")
     foreach(_source IN ITEMS ${sourceheaders})
         get_filename_component(_source_path "${_source}" PATH)
         string(REPLACE "${CMAKE_SOURCE_DIR}" "" _group_path "${_source_path}")
+        string(REPLACE "../include/" "" _group_path "${_group_path}")  # Get rid of the ../include/ before the API headers
         string(REPLACE "/" "\\" _group_path "${_group_path}")
         source_group("${_group_path}" FILES "${_source}")
     endforeach()
@@ -109,7 +100,7 @@ target_include_directories(
 )
 
 # The API files are in the ../include folder instead of with the rest of the source (in src/)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
+#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
 
 # ---- Create an installable target ----

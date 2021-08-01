@@ -8,3 +8,4 @@ tests/Tests/Release/
 /tests/Tests/Tests.vcxproj.user
 /tests/*.CTD
 /tests/*.XBT
+/examples/hyo2_location.h

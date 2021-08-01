@@ -27,4 +27,9 @@ option(SSP_COMPILE_TESTS "Compile test programs" OFF)
 
 
 add_subdirectory(src/)
-add_subdirectory(examples/)
+if (SSP_COMPILE_EXAMPLES)
+    add_subdirectory(examples/)
+endif()
+if (SSP_COMPILE_TESTS)
+    add_subdirectory(tests/)
+endif()
