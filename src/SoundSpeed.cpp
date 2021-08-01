@@ -28,6 +28,7 @@
   */
 
 #include "pch.h"
+#include <algorithm>
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -70,7 +71,7 @@ T max_vec(const std::vector<T>& v)
 
 
 
-#ifdef MATPLOTLIB_CPP_SUPPORT
+#ifdef SSP_MATPLOTLIB_CPP_SUPPORT
 bool PlotCast(const SCast& cast)
 {
     namespace plt = matplotlibcpp;
@@ -94,7 +95,7 @@ bool PlotCast(const SCast& cast)
     return true;
 }
 #else
-bool PlotData(const SCast& cast)
+bool PlotCast(const SCast& cast)
 {
     return true;
 }

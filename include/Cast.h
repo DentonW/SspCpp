@@ -30,6 +30,7 @@
 #pragma once
 
 #include <ctime>
+#include <string>
 #include <vector>
 
 namespace ssp
@@ -47,8 +48,8 @@ namespace ssp
 
     struct SCast
     {
-        std::string desc;  // Description of type of file read from
-        std::string fileName;  // Filename of this cast
+        std::string desc;  //!< Description of type of file read from
+        std::string fileName;  //!< Filename of this cast
         std::vector<SCastEntry> entries;
         std::tm time;  //!< May use C++20 features from std::chrono in the future
         double lat;  //!< Latitude
