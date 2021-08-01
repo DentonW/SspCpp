@@ -1,6 +1,7 @@
 .vs/
 build/
-x64/
+old/
 packages/
+x64/
 tests/Tests/Debug/
 tests/Tests/Release/
