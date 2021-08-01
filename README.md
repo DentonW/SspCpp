@@ -6,3 +6,12 @@ a common interface to load many types of CTD casts to determine the sound speed 
 
 SspCpp is loosely modeled after the [HydrOffice Sound Speed](https://github.com/hydroffice/hyo2_soundspeed)
 Python library.
+
+## Supported File Formats
+
+These are the currently supported formats, and support for other formats is planned.
+
+* Kongsberg Maritime (.asvp)
+* Sea&Sun (.tob)
+* SeaBird (.cnv)
+* SonarDyne (.pro)
