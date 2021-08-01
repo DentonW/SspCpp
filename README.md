@@ -1,3 +1,5 @@
+[![CMake](https://github.com/DentonW/SspCpp/actions/workflows/cmake.yml/badge.svg)](https://github.com/DentonW/SspCpp/actions/workflows/cmake.yml)
+
 # SspCpp: A C++ Underwater Sound Speed Profile File Reader Library
 
 Underwater conductivity/temperature/depth (CTD) cast equipment can generate one of many output file
