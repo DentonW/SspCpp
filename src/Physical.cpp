@@ -56,4 +56,26 @@ double Depth(double pressureDBar, double latitudeDeg)
     return Z;
 }
 
+
+double DepthToPressure(double depth, double latitudeDeg)
+{
+    double z = depth;
+
+    double sinphi = sin(latitudeDeg * 0.017453292519943295);  // Convert to radians
+    //double g = 9.7803 * (1.0 + 5.3e-3 * sinphi*sinphi);  // Their paper appears to have an error with 0.7803 instead
+    double g = Gravity(latitudeDeg);
+    double hZ45 = 1.00818e-2 * z + 2.465e-8 * z*z - 1.25e-13 * z*z*z + 2.8e-19 * z*z*z*z;
+    double k = (g - 2e-5 * z) / (9.80612 - 2e-5 * z);
+
+    double p = hZ45 * k;  // In MegaPascals
+    p *= 100.0;  // Convert using 1 Mpa = 100 decibars
+    return p;
+}
+
+
+double PascalToBar(double pascals)
+{
+    return 1e-5 * pascals;
+}
+
 };  // End namespace ssp

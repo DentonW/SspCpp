@@ -116,8 +116,8 @@ std::optional<ssp::SCast> ssp::ReadAsvp(const std::string& fileName)
         return {};
     }
 
-    cast.lat = 0;
-    cast.lon = 0;
+    //cast.lat = 0;
+    //cast.lon = 0;
     cast.desc = "Kongsberg Maritime (.asvp)";
     cast.fileName = fileName;
 

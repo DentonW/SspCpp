@@ -397,8 +397,8 @@ std::optional<SCast> ReadSeaBirdTsv(const std::string& fileName)
         return {};
     }
 
-    cast.lat = 0;
-    cast.lon = 0;
+    //cast.lat = 0;
+    //cast.lon = 0;
     cast.desc = "Sea-Bird Nautilus";
     cast.fileName = fileName;
 

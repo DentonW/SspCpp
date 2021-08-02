@@ -48,6 +48,7 @@
 #include <SspCpp/ProcessChecks.h>
 #include <SspCpp/SoundSpeed.h>
 
+#include "Readers/Aoml.h"
 #include "Readers/Asvp.h"
 #include "Readers/SeaAndSun.h"
 #include "Readers/SeaBird.h"
@@ -107,6 +108,9 @@ std::optional<SCast> ReadCast(const std::string& fileName, eCastType type)
 {
     switch (type)
     {
+        case eCastType::Aoml:
+            return ReadAoml(fileName);
+
         case eCastType::Asvp:
             return ReadAsvp(fileName);
 

@@ -29,6 +29,7 @@
 
 #pragma once
 
+#include <algorithm>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -44,5 +45,36 @@ namespace ssp
         std::vector<std::string> entries(beginStream, endStream);
 
         return entries;
+    }
+
+    /*
+     * Case sensitive implementation of StartsWith()
+     * It checks if the string 'mainStr' starts with given string 'toMatch'
+     * Example from https://thispointer.com/c-check-if-a-string-starts-with-an-another-given-string/
+     */
+    inline bool StartsWith(std::string mainStr, std::string toMatch)
+    {
+        // std::string::find returns 0 if toMatch is found at starting
+        if (mainStr.find(toMatch) == 0)
+            return true;
+        else
+            return false;
+    }
+
+    /*
+     * Case insensitive implementation of StartsWith()
+     * It checks if the string 'mainStr' starts with given string 'toMatch'
+     * Example from https://thispointer.com/c-check-if-a-string-starts-with-an-another-given-string/
+     */
+    inline bool StartsWithCaseInsensitive(std::string mainStr, std::string toMatch)
+    {
+        // Convert mainStr to lower case
+        std::transform(mainStr.begin(), mainStr.end(), mainStr.begin(), ::tolower);
+        // Convert toMatch to lower case
+        std::transform(toMatch.begin(), toMatch.end(), toMatch.begin(), ::tolower);
+        if (mainStr.find(toMatch) == 0)
+            return true;
+        else
+            return false;
     }
 };

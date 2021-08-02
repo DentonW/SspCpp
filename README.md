@@ -13,7 +13,8 @@ Python library.
 
 These are the currently supported formats, and support for other formats is planned.
 
+* AOML AMVER-SEAS XBT (.txt)
 * Kongsberg Maritime (.asvp)
 * Sea&Sun (.tob)
-* SeaBird (.cnv)
+* Sea-Bird (.cnv)
 * SonarDyne (.pro)

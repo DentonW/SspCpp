@@ -50,6 +50,7 @@ set(headers
     ../include/SspCpp/SoundSpeed.h
     StringUtilities.h
     TimeStruct.h
+    Readers/Aoml.h
     Readers/Asvp.h
     Readers/SeaAndSun.h
     Readers/SeaBird.h
@@ -57,6 +58,7 @@ set(headers
 )
 
 set(sources
+    Readers/Aoml.cpp
     Readers/Asvp.cpp
     Readers/SeaAndSun.cpp
     Readers/SeaBird.cpp

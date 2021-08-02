@@ -7,10 +7,18 @@
 
 int main()
 {
-    double pDbar = 10.1325;  // 1 atm
-    std::cout << ssp::Depth(pDbar, 0) << "\n";
+    //double pDbar = 10.1325;  // 1 atm
+    //std::cout << ssp::Depth(pDbar, 0) << "\n";
+    //std::cout << ssp::DepthToPressure(100, 0.0) << "\n";  // ~10.04 bar
+    //std::cout << ssp::DepthToPressure(200, 0.0) << "\n";  // ~20.08 bar
+    //std::cout << ssp::DepthToPressure(305, 0.0) << "\n";  // ~30.62 bar
 
     std::string hyo2 = HYO2_LOC;
+
+    auto sspAoml1 = ssp::ReadCast(hyo2 + "aoml/_EX1812_AXBT005_181129.txt", ssp::eCastType::Aoml);
+    if (!sspAoml1)
+        return 1;
+    //PlotCast(*sspAoml1);
 
     auto sspSeaBird7 = ssp::ReadCast(hyo2 + "seabird/007_201605262145_CTD-SB_CON_BIN_DER.cnv", ssp::eCastType::SeaBirdCnv);
     if (!sspSeaBird7)

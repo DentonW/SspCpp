@@ -121,8 +121,8 @@ std::optional<ssp::SCast> ssp::ReadSonardyne(const std::string& fileName)
         return {};
     }
 
-    cast.lat = 0;
-    cast.lon = 0;
+    //cast.lat = 0;
+    //cast.lon = 0;
     cast.desc = "Sonardyne";
     cast.fileName = fileName;
 

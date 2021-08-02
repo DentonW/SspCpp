@@ -278,8 +278,8 @@ std::optional<SCast> ReadSeaAndSun(const std::string& fileName)
         return {};
     }
 
-    cast.lat = 0;
-    cast.lon = 0;
+    //cast.lat = 0;
+    //cast.lon = 0;
     cast.desc = "Sea & Sun (.tob)";
     cast.fileName = fileName;
 

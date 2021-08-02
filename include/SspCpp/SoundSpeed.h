@@ -44,12 +44,13 @@ namespace ssp
     //! 
     enum class eCastType
     {
-        Asvp,  //!< Kongsberg Maritime (.asvp)
-        SeaAndSun,  //!< .tob
-        SeaBirdCnv,  //!< 
-        SeaBirdTsv,  //!< 
-        Sonardyne,  //!< 
-        Unknown  //!< 
+        Aoml,        //!< AOML AMVER-SEAS XBT (.txt)
+        Asvp,        //!< Kongsberg Maritime (.asvp)
+        SeaAndSun,   //!< Sea&Sun (.tob)
+        SeaBirdCnv,  //!< Sea-Bird (.cnv)
+        SeaBirdTsv,  //!< Sea-Bird (.tsv)
+        Sonardyne,   //!< SonarDyne (.pro)
+        Unknown      //!< Does nothing currently - will try to determine file format in the future
     };
 
     std::optional<SCast> ReadCast(const std::string& fileName, eCastType type = eCastType::Unknown);
@@ -57,7 +58,14 @@ namespace ssp
     bool PlotCast(const ssp::SCast& cast);
 
 
-
+    /*!
+     * Wong-Zhu equation for calculating sound speed
+     * 
+     * Valid ranges:
+     *  Temp: [0, 40] Celsius
+     *  Salinity: [0, 40] parts per thousand (ppt)
+     *  Pressure: [0, 1000] bar
+     */
     double WongZhu(double temp, double salin, double pressure);
 
     double Gravity(double latitudeDeg);
@@ -66,4 +74,11 @@ namespace ssp
      *   https://doi.org/10.1121/1.421275
      */
     double Depth(double pressureDBar, double latitudeDeg);
+
+    /*! From Leroy and Parthiot, "Depth-pressure relationships in the oceans and seas"
+     *   https://doi.org/10.1121/1.421275. Returns pressure in decibars (instead of MegaPascals as in the paper).
+     */
+    double DepthToPressure(double depth, double latitudeDeg);
+
+    double PascalToBar(double pascals);
 };
