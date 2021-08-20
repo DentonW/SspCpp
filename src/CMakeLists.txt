@@ -48,6 +48,7 @@ set(headers
     ../include/SspCpp/Cast.h
     ../include/SspCpp/ProcessChecks.h
     ../include/SspCpp/SoundSpeed.h
+    README.md
     StringUtilities.h
     TimeStruct.h
     Readers/Aoml.h
@@ -58,14 +59,14 @@ set(headers
 )
 
 set(sources
+    Physical.cpp
+    ProcessChecks.cpp
+    SoundSpeed.cpp
     Readers/Aoml.cpp
     Readers/Asvp.cpp
     Readers/SeaAndSun.cpp
     Readers/SeaBird.cpp
     Readers/Sonardyne.cpp
-    Physical.cpp
-    ProcessChecks.cpp
-    SoundSpeed.cpp
 )
 
 # Create Visual Studio filters to preserve the folder structure
