@@ -35,9 +35,9 @@
 #include "ProcessChecks.h"
 
 #define SSP_WORLD_VERSION 1
-#define SSP_MAJOR_VERSION 0
+#define SSP_MAJOR_VERSION 2
 #define SSP_MINOR_VERSION 0
-#define SSP_STRING_VERSION "1.0.0"
+#define SSP_STRING_VERSION "1.2.0"
 
 namespace ssp
 {
