@@ -1,12 +1,10 @@
-# YAML 1.2
----
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
 authors: 
-  -
-    family-names: Woods
-    given-names: Denton
+  - family-names: "Woods"
+    given-names: "Denton"
     orcid: "https://orcid.org/0000-0001-7423-3657"
-cff-version: "1.1.0"
 license: MIT
-message: "If you use this software, please cite it using these metadata."
-repository-code: "https://github.com/DentonW/SspCpp"
-version: "1.1.2"
+title: "SspCpp: A C++ Underwater Sound Speed Profile File Reader Library"
+url: "https://github.com/DentonW/SspCpp"
+version: 1.1.2
