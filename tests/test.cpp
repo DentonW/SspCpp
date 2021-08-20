@@ -2,6 +2,7 @@
 #include "catch.hpp"
 #include <SspCpp/SoundSpeed.h>
 #include "../src/TimeStruct.h"
+#include "../src/LatLong.h"
 
 
 TEST_CASE("Time creation test", "[times]")
@@ -44,6 +45,51 @@ TEST_CASE("Wong-Zhu equation", "[ssp-calc]")
     REQUIRE(ssp::WongZhu(40, 40, 800) == Approx(1700.629));
     REQUIRE(ssp::WongZhu(40, 40, 900) == Approx(1716.453));
     REQUIRE(ssp::WongZhu(40, 40, 1000) == Approx(1732.017));
+
+    return;
+}
+
+
+TEST_CASE("Latitude-longitude setting", "[lat-long]")
+{
+    SLatLong s;
+    s.lat = 10;
+    s.lon = -30;
+
+    REQUIRE(s.latitude == 10);
+    REQUIRE(s.longitude == -30);
+
+    return;
+}
+
+
+TEST_CASE("Latitude-longitude conversions", "[lat-long]")
+{
+    REQUIRE(LatLonToDecimal(36, 10, 27.5) == Approx(36.1743055));
+    REQUIRE(LatLonToDecimal(-36, 10, 27.5) == Approx(-36.1743055));
+
+    double d, m, s;
+    REQUIRE(LatLonFromDecimal(36.1743055, d, m, s) == true);
+    REQUIRE(d == Approx(36));
+    REQUIRE(m == Approx(10));
+    REQUIRE(s == Approx(27.5));
+
+    REQUIRE(LatLonFromDecimal(-36.1743055, d, m, s) == true);
+    REQUIRE(d == Approx(-36));
+    REQUIRE(m == Approx(10));
+    REQUIRE(s == Approx(27.5));
+
+    double dec = LatLonToDecimal(-82, 3, 54.617);
+    LatLonFromDecimal(dec, d, m, s);
+    REQUIRE(d == Approx(-82));
+    REQUIRE(m == Approx(3));
+    REQUIRE(s == Approx(54.617));
+
+    dec = LatLonToDecimal(65, 0, 54.617);
+    LatLonFromDecimal(dec, d, m, s);
+    REQUIRE(d == Approx(65));
+    REQUIRE(m == Approx(0));
+    REQUIRE(s == Approx(54.617));
 
     return;
 }

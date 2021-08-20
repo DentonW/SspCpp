@@ -48,7 +48,8 @@ set(headers
     ../include/SspCpp/Cast.h
     ../include/SspCpp/ProcessChecks.h
     ../include/SspCpp/SoundSpeed.h
-    README.md
+	LatLong.h
+    #../README.md
     StringUtilities.h
     TimeStruct.h
     Readers/Aoml.h
@@ -59,6 +60,7 @@ set(headers
 )
 
 set(sources
+    LatLong.cpp
     Physical.cpp
     ProcessChecks.cpp
     SoundSpeed.cpp
