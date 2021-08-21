@@ -8,11 +8,19 @@ project(SspExample LANGUAGES CXX)
 
 # ---- Dependencies ----
 
-include(../cmake/CPM.cmake)
+#include(../cmake/CPM.cmake)
 
 #CPMAddPackage(NAME SspCpp SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/../src)
-CPMAddPackage("gh:hydroffice/hyo2_soundspeed#2021.1.7")
+# This doesn't seem to work on anything other than my computer...
+#CPMAddPackage("gh:hydroffice/hyo2_soundspeed#2021.1.7")
 #message(STATUS "hyo2: ${FETCHCONTENT_SOURCE_DIR_HYO2_SOUNDSPEED}")
+include(FetchContent)
+FetchContent_Declare(
+  hyo2_soundspeed
+  URL      https://github.com/hydroffice/hyo2_soundspeed/archive/refs/tags/v.2021.2.2.zip
+  URL_HASH MD5=1b5c4c8c5c1893ed1cde475852cace51
+)
+FetchContent_MakeAvailable(hyo2_soundspeed)
 
 set(HYO2_LOC "${FETCHCONTENT_BASE_DIR}/hyo2_soundspeed-src/data/input/")
 file(WRITE hyo2_location.h

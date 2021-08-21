@@ -50,6 +50,8 @@ namespace ssp
 
 bool ParseCnvTime(std::string header, SCast& cast)
 {
+    using namespace date;
+
     std::regex rgxTime("# start_time = ([a-zA-Z]+ [0-9]+ [0-9]+ [0-9]+:[0-9]+:[0-9]+)");
     std::smatch match;
     std::regex_search(header, match, rgxTime);

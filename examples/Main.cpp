@@ -27,7 +27,7 @@ int main()
     Cleanup(*sspSeaBird7);
     PlotCast(*sspSeaBird7);
 
-    auto sspSeaSun1 = ssp::ReadCast(hyo2 + "seaandsun/1608240753.tob", ssp::eCastType::SeaAndSun);
+    auto sspSeaSun1 = ssp::ReadCast(hyo2 + "seaandsun/1608240753.TOB", ssp::eCastType::SeaAndSun);
     if (!sspSeaSun1)
         return 1;
     PlotCast(*sspSeaSun1);

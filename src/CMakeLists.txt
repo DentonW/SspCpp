@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 # Note: update this to your new project's name and version
 project(
   SspCpp
-  VERSION 1.0.0
+  VERSION 1.2.1
   DESCRIPTION "Sound Speed Profile Library"
   HOMEPAGE_URL https://github.com/DentonW/SspCpp
   LANGUAGES CXX
@@ -14,9 +14,8 @@ project(
 # ---- Set options ----
 # (Needed before CPM calls)
 #option(SSP_MATPLOTLIB_CPP_SUPPORT "Use matplotlib-cpp for plotting" OFF)
-option(SSP_COMPILE_EXAMPLES "Compile example programs" ON)
-option(SSP_COMPILE_TESTS "Compile test programs" OFF)
-
+#option(SSP_COMPILE_EXAMPLES "Compile example programs" ON)
+#option(SSP_COMPILE_TESTS "Compile test programs" OFF)
 
 # ---- Add dependencies via CPM ----
 # see https://github.com/TheLartians/CPM.cmake for more info
