@@ -23,7 +23,7 @@ endif()
 
 # ---- Set options ----
 # (Needed before CPM calls)
-#option(SSP_MATPLOTLIB_CPP_SUPPORT "Use matplotlib-cpp for plotting" OFF)
+option(SSP_MATPLOTLIB_CPP_SUPPORT "Use matplotlib-cpp for plotting" OFF)
 option(SSP_COMPILE_EXAMPLES "Compile example programs" ON)
 option(SSP_COMPILE_TESTS "Compile test programs" OFF)
 

@@ -2,7 +2,7 @@
 #include <iostream>
 //#include "../include/SspCpp/SoundSpeed.h"
 #include <SspCpp/SoundSpeed.h>
-#include "hyo2_location.h"
+//#include "hyo2_location.h"
 
 
 int main()
@@ -19,7 +19,7 @@ int main()
     auto sspAoml1 = ssp::ReadCast(hyo2 + "aoml/_EX1812_AXBT005_181129.txt", ssp::eCastType::Aoml);
     if (!sspAoml1)
         return 1;
-    //PlotCast(*sspAoml1);
+    PlotCast(*sspAoml1);
 
     auto sspSeaBird7 = ssp::ReadCast(hyo2 + "seabird/007_201605262145_CTD-SB_CON_BIN_DER.cnv", ssp::eCastType::SeaBirdCnv);
     if (!sspSeaBird7)

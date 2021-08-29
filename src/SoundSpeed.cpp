@@ -33,15 +33,8 @@
 #include <sstream>
 #include <vector>
 #include <fmt/format.h>
-
-#ifdef MATPLOTLIB_CPP_SUPPORT
-    #ifdef _DEBUG
-      #undef _DEBUG
-        #include <matplotlibcpp.h>
-      #define _DEBUG
-    #else
-      #include <matplotlibcpp.h>
-    #endif
+#ifdef SSP_MATPLOTLIB_CPP_SUPPORT
+    #include <matplotlibcpp.h>
 #endif
 
 #include <SspCpp/Cast.h>

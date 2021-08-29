@@ -22,11 +22,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(hyo2_soundspeed)
 
-set(HYO2_LOC "${FETCHCONTENT_BASE_DIR}/hyo2_soundspeed-src/data/input/")
-file(WRITE hyo2_location.h
-     "#pragma once\n\nconst char* HYO2_LOC = \"${HYO2_LOC}\";\n"
-)
-
 # ---- Create standalone executable ----
 
 #file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
@@ -37,3 +32,9 @@ add_executable(SspExample ${sources})
 set_target_properties(SspExample PROPERTIES CXX_STANDARD 17 OUTPUT_NAME "SspCpp")
 
 target_link_libraries(SspExample SspCpp::SspCpp)
+
+set(HYO2_LOC "${FETCHCONTENT_BASE_DIR}/hyo2_soundspeed-src/data/input/")
+#file(WRITE hyo2_location.h
+#     "#pragma once\n\nconst char* HYO2_LOC = \"${HYO2_LOC}\";\n"
+#)
+target_compile_definitions(SspExample PRIVATE HYO2_LOC="${HYO2_LOC}")

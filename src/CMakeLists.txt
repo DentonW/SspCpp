@@ -6,16 +6,10 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 project(
   SspCpp
   VERSION 1.2.1
-  DESCRIPTION "Sound Speed Profile Library"
+  DESCRIPTION "SspCpp: Sound Speed Profile Library"
   HOMEPAGE_URL https://github.com/DentonW/SspCpp
   LANGUAGES CXX
 )
-
-# ---- Set options ----
-# (Needed before CPM calls)
-#option(SSP_MATPLOTLIB_CPP_SUPPORT "Use matplotlib-cpp for plotting" OFF)
-#option(SSP_COMPILE_EXAMPLES "Compile example programs" ON)
-#option(SSP_COMPILE_TESTS "Compile test programs" OFF)
 
 # ---- Add dependencies via CPM ----
 # see https://github.com/TheLartians/CPM.cmake for more info
@@ -34,11 +28,18 @@ CPMAddPackage(
 
 CPMAddPackage("gh:HowardHinnant/date@3.0.1")
 
-# Currently having trouble linking against this with CMake, so don't currently use it
-#if (SSP_MATPLOTLIB_CPP_SUPPORT)
-#    message(STATUS "Matplotlib++")
-#    CPMAddPackage("gh:lava/matplotlib-cpp#ef0383f1315d32e0156335e10b82e90b334f6d9f")
-#endif()
+if (SSP_MATPLOTLIB_CPP_SUPPORT)
+    # This project appears to be abandoned, so use my fork (has some updates)
+    CPMAddPackage(
+      NAME matplotlib_cpp
+      GIT_TAG f59b63b52b400b76fde0dce9a899bd8fab5d1db5
+      GITHUB_REPOSITORY DentonW/matplotlib-cpp
+      OPTIONS "MATPLOTLIBCPP_BUILD_EXAMPLES OFF"
+    )
+    #if (matplotlib_cpp_ADDED)
+    #    target_include_directories(matplotlib_cpp INTERFACE "${matplotlib_cpp_SOURCE_DIR}")
+    #endif()
+endif()
 
 
 # ---- Add source files ----
@@ -47,7 +48,7 @@ set(headers
     ../include/SspCpp/Cast.h
     ../include/SspCpp/ProcessChecks.h
     ../include/SspCpp/SoundSpeed.h
-	LatLong.h
+    LatLong.h
     #../README.md
     StringUtilities.h
     TimeStruct.h
@@ -106,6 +107,15 @@ target_include_directories(
   SspCpp PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/../include>
                  $<INSTALL_INTERFACE:include/${PROJECT_NAME}-${PROJECT_VERSION}>
 )
+
+if (SSP_MATPLOTLIB_CPP_SUPPORT)
+    message(STATUS "matplotlib-cpp support on")
+    target_compile_definitions(SspCpp PRIVATE SSP_MATPLOTLIB_CPP_SUPPORT)
+    target_link_libraries(SspCpp PRIVATE matplotlib_cpp)
+    target_include_directories(SspCpp PRIVATE ${matplotlib_cpp_SOURCE_DIR})
+else()
+    message(STATUS "matplotlib-cpp support off")
+endif()
 
 # The API files are in the ../include folder instead of with the rest of the source (in src/)
 #include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
