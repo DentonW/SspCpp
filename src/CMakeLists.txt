@@ -46,9 +46,9 @@ endif()
 
 set(headers
     ../include/SspCpp/Cast.h
+    ../include/SspCpp/LatLong.h
     ../include/SspCpp/ProcessChecks.h
     ../include/SspCpp/SoundSpeed.h
-    LatLong.h
     #../README.md
     StringUtilities.h
     TimeStruct.h
@@ -106,6 +106,7 @@ target_link_libraries(SspCpp PRIVATE fmt::fmt date::date)
 target_include_directories(
   SspCpp PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/../include>
                  $<INSTALL_INTERFACE:include/${PROJECT_NAME}-${PROJECT_VERSION}>
+         PRIVATE ${PROJECT_SOURCE_DIR}
 )
 
 if (SSP_MATPLOTLIB_CPP_SUPPORT)

@@ -27,7 +27,7 @@
   * \brief
   */
 
-#include "../pch.h"
+#include "pch.h"
 #include "Sonardyne.h"
 #include <algorithm>
 #include <fstream>

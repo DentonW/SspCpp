@@ -30,38 +30,38 @@
 #pragma once
 
 
-//! Structure holding latitude and longitude in decimal degrees
-struct SLatLong
+namespace ssp
 {
-    union
+
+    //! Structure holding latitude and longitude in decimal degrees
+    struct SLatLong
     {
-        double latitude;
-        double lat;
+        union
+        {
+            double latitude;
+            double lat;
+        };
+        union
+        {
+            double longitude;
+            double lon;
+        };
     };
-    union
-    {
-        double longitude;
-        double lon;
-    };
-};
 
 
-/*!
- * \brief Converts latitude or longitude to its decimal values from deg:min:sec format
- * 
- * This does no bounds checking. All values other than degrees must be positive. This follows this typical
- * format, where west and south entries are negative.
- */
-double LatLonToDecimal(int degrees, unsigned int minutes, double seconds);
+    /*!
+     * \brief Converts latitude or longitude to its decimal values from deg:min:sec format
+     *
+     * This does no bounds checking. All values other than degrees must be positive. This follows this typical
+     * format, where west and south entries are negative.
+     */
+    double LatLonToDecimal(int degrees, unsigned int minutes, double seconds);
 
-/*!
- * \brief Converts latitude or longitude from its decimal values to deg:min:sec format
- *
- * This does no bounds checking. This follows this typical format, where west and south entries are negative.
- */
-bool LatLonFromDecimal(double decimal, double& degrees, double& minutes, double& seconds);
+    /*!
+     * \brief Converts latitude or longitude from its decimal values to deg:min:sec format
+     *
+     * This does no bounds checking. This follows this typical format, where west and south entries are negative.
+     */
+    bool LatLonFromDecimal(double decimal, double& degrees, double& minutes, double& seconds);
 
-//! Checks whether a given lat/lon is within valid ranges
-bool CheckLatLon(const SLatLong& latlon);
-//! Checks whether a given lat/lon is within valid ranges
-bool CheckLatLon(double lat, double lon);
+};  // End namespace ssp

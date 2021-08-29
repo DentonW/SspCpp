@@ -27,14 +27,14 @@
   * \brief  
   */
 
-#include "../pch.h"
+#include "pch.h"
 #include "Aoml.h"
 #include <fstream>
 #include <regex>
 #include <fmt/format.h>
 #include <SspCpp/SoundSpeed.h>
-#include "../StringUtilities.h"
-#include "../TimeStruct.h"
+#include "StringUtilities.h"
+#include "TimeStruct.h"
 
 
 namespace ssp::aoml

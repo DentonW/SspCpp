@@ -27,7 +27,7 @@
   * \brief
   */
 
-#include "../pch.h"
+#include "pch.h"
 #include "SeaAndSun.h"
 #include <array>
 #include <fstream>

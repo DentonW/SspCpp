@@ -31,6 +31,9 @@
 #include "LatLong.h"
 
 
+namespace ssp
+{
+
 // Sign function from https://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c
 template <typename T> int sgn(T val)
 {
@@ -66,17 +69,4 @@ bool LatLonFromDecimal(double decimal, double& degrees, double& minutes, double&
     return true;
 }
 
-
-bool CheckLatLon(const SLatLong& latlon)
-{
-    return CheckLatLon(latlon.lat, latlon.lon);
-}
-
-bool CheckLatLon(double lat, double lon)
-{
-    if (lat < -90 || lat > 90)
-        return false;
-    if (lon < -180 || lon > 180)
-        return false;
-    return true;
-}
+};  // End namespace ssp

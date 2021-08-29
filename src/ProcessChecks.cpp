@@ -31,6 +31,7 @@
   */
 
 #include "pch.h"
+#include <SspCpp/LatLong.h>
 #include <SspCpp/ProcessChecks.h>
 #include <algorithm>
 
@@ -70,12 +71,51 @@ void RemoveDuplicateDepths(SCast& cast)
 }
 
 
+//bool CheckLatLon(const SLatLong& latlon)
+//{
+//    return CheckLatLon(latlon.lat, latlon.lon);
+//}
+
+
 bool CheckLatLon(SCast& cast)
 {
-    if (cast.lat < -90 || cast.lat > 90)
+    return CheckLatLon(cast.lat, cast.lon);
+}
+
+bool CheckLatLon(double lat, double lon)
+{
+    if (lat < -90 || lat > 90)
         return false;
-    if (cast.lon < -180 || cast.lat > 180)
+    if (lon < -180 || lat > 180)
         return false;
+    return true;
+}
+
+
+bool CheckSoundSpeed(double c)
+{
+    if (c <= 0.0)
+        return false;
+    // This is the theoretical highest sound speed possible, in solid hydrogen.
+    //  From "Speed of sound from fundamental physical constants" by K. Trachenko et. al.,
+    //  doi: 10.1126/sciadv.abc8662
+    if (c > 36100.0)
+        return false;
+
+    return true;
+}
+
+
+bool CheckDepthIncreasing(const std::vector<SCastEntry>& cast)
+{
+    if (cast.size() == 0)
+        return false;
+
+    for (size_t n = 1; n < cast.size(); ++n)
+    {
+        if (cast[n].c <= cast[n - 1].c)
+            return false;
+    }
 
     return true;
 }

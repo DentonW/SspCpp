@@ -27,12 +27,12 @@
   * \brief  
   */
 
-#include "../pch.h"
+#include "pch.h"
 #include "Asvp.h"
 #include <fstream>
 #include <fmt/format.h>
-#include "../StringUtilities.h"
-#include "../TimeStruct.h"
+#include "StringUtilities.h"
+#include "TimeStruct.h"
 
 
 std::optional<ssp::SCast> ssp::ReadAsvp(const std::string& fileName)

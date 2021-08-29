@@ -27,7 +27,7 @@
   * \brief
   */
 
-#include "../pch.h"
+#include "pch.h"
 #include "Unb.h"
 #include <algorithm>
 #include <fstream>
@@ -39,9 +39,10 @@
 #include <date/date.h>
 #include <fmt/format.h>
 #include <SspCpp/Cast.h>
-#include "../LatLong.h"
-#include "../StringUtilities.h"
-#include "../TimeStruct.h"
+#include <SspCpp/LatLong.h>
+#include <SspCpp/ProcessChecks.h>
+#include "StringUtilities.h"
+#include "TimeStruct.h"
 
 
 namespace ssp::unb
@@ -108,9 +109,6 @@ namespace ssp::unb
             return false;
         ss >> cast.lon;
         if (!ss)
-            return false;
-
-        if (!CheckLatLon(cast.lat, cast.lon))
             return false;
 
         // The next line has a lat/lon for logging, but the two examples we have are filled with zeros
