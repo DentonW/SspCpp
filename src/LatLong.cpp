@@ -28,7 +28,7 @@
   */
 
 #include "pch.h"
-#include "LatLong.h"
+#include <SspCpp/LatLong.h>
 
 
 namespace ssp
