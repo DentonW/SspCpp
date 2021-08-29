@@ -32,6 +32,7 @@
 
 #pragma once
 
+#include "LatLong.h"
 #include "Cast.h"
 
 
@@ -48,12 +49,17 @@ namespace ssp
     void RemoveDuplicateDepths(SCast& cast);
 
     //! Checks whether latitude/longitude values are within valid ranges
-    bool CheckLatLon(SCast& cast);
-    //! Checks whether latitude/longitude values are within valid ranges
     bool CheckLatLon(double lat, double lon);
+    //! Checks whether latitude/longitude values are within valid ranges
+    bool CheckLatLon(const SLatLong& latlon);
+    //! Checks whether latitude/longitude values are within valid ranges
+    bool CheckLatLon(SCast& cast);
 
     //! Checks whether the sound speed is within physically valid ranges
     bool CheckSoundSpeed(double c);
+
+    //! Checks whether the depth fits within the ocean depth limits
+    bool CheckDepth(double depth);
 
     //! Checks whether the depth is monotonically increasing
     bool CheckDepthIncreasing(const std::vector<SCastEntry>& cast);

@@ -71,17 +71,6 @@ void RemoveDuplicateDepths(SCast& cast)
 }
 
 
-//bool CheckLatLon(const SLatLong& latlon)
-//{
-//    return CheckLatLon(latlon.lat, latlon.lon);
-//}
-
-
-bool CheckLatLon(SCast& cast)
-{
-    return CheckLatLon(cast.lat, cast.lon);
-}
-
 bool CheckLatLon(double lat, double lon)
 {
     if (lat < -90 || lat > 90)
@@ -89,6 +78,16 @@ bool CheckLatLon(double lat, double lon)
     if (lon < -180 || lat > 180)
         return false;
     return true;
+}
+
+bool CheckLatLon(const SLatLong& latlon)
+{
+    return CheckLatLon(latlon.lat, latlon.lon);
+}
+
+bool CheckLatLon(SCast& cast)
+{
+    return CheckLatLon(cast.lat, cast.lon);
 }
 
 
@@ -102,6 +101,18 @@ bool CheckSoundSpeed(double c)
     if (c > 36100.0)
         return false;
 
+    return true;
+}
+
+
+bool CheckDepth(double depth)
+{
+    if (depth < 0.0)
+        return false;
+    // Depth of the Challenger Deep (deepest part of the ocean) as measured in a 2020 survey
+    //  (https://asa.scitation.org/doi/abs/10.1121/1.5146741)
+    if (depth > 10991)
+        return false;
     return true;
 }
 
@@ -123,15 +134,20 @@ bool CheckDepthIncreasing(const std::vector<SCastEntry>& cast)
 
 bool CheckLimits(const SCast& cast)
 {
-    return false;
+    for (const auto& entry : cast.entries)
+    {
+        if (!CheckLimits(entry))
+            return false;
+    }
+    return true;
 }
 
 
 bool CheckLimits(const SCastEntry& entry)
 {
-    if (entry.c <= 0)
+    if (!CheckSoundSpeed(entry.c))
         return false;
-    if (entry.depth <= 0)
+    if (!CheckDepth(entry.depth))
         return false;
     // The next values are optional, so they can be 0
     if (entry.pressure < 0)
