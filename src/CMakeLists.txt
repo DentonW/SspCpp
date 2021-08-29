@@ -56,6 +56,7 @@ set(headers
     Readers/SeaAndSun.h
     Readers/SeaBird.h
     Readers/Sonardyne.h
+    Readers/Unb.h
 )
 
 set(sources
@@ -68,6 +69,7 @@ set(sources
     Readers/SeaAndSun.cpp
     Readers/SeaBird.cpp
     Readers/Sonardyne.cpp
+    Readers/Unb.cpp
 )
 
 # Create Visual Studio filters to preserve the folder structure

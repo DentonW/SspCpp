@@ -31,7 +31,6 @@
 
 #include <optional>
 #include <string>
-#include <vector>
 #include <SspCpp/Cast.h>
 
 namespace ssp

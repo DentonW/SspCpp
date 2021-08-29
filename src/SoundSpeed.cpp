@@ -53,6 +53,7 @@
 #include "Readers/SeaAndSun.h"
 #include "Readers/SeaBird.h"
 #include "Readers/Sonardyne.h"
+#include "Readers/Unb.h"
 
 
 namespace ssp
@@ -125,6 +126,9 @@ std::optional<SCast> ReadCast(const std::string& fileName, eCastType type)
 
         case eCastType::Sonardyne:
             return ReadSonardyne(fileName);
+
+        case eCastType::Unb:
+            return ReadUnb(fileName);
 
         case eCastType::Unknown:  // Fallthrough
         default:

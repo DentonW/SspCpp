@@ -23,7 +23,7 @@
  */
 
  /*!
-  * \file   SeaBird.h
+  * \file   Unb.h
   * \brief
   */
 
@@ -35,7 +35,5 @@
 
 namespace ssp
 {
-    std::optional<SCast> ReadSeaBirdCnv(const std::string& fileName);
-    std::optional<SCast> ReadSeaBirdTsv(const std::string& fileName);
-    std::optional<SCast> ReadSeaBird(const std::string& fileName);
+    std::optional<SCast> ReadUnb(const std::string& fileName);
 };
