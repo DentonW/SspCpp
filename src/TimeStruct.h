@@ -74,6 +74,7 @@ namespace ssp
 
     inline bool CreateTime(const date::sys_seconds& tp, std::tm& time)
     {
+        using namespace date;
         // Assuming that the input time is valid
         auto tp_days = floor<date::days>(tp);
         auto hms = date::hh_mm_ss<std::chrono::seconds>{ tp - tp_days };
