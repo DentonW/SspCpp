@@ -31,6 +31,7 @@
 
 #include <ctime>
 #include <string>
+#include <date/date.h>
 
 
 namespace ssp
@@ -70,4 +71,18 @@ namespace ssp
             return false;
         }
     }
+
+    inline bool CreateTime(const date::sys_seconds& tp, std::tm& time)
+    {
+        // Assuming that the input time is valid
+        auto tp_days = floor<date::days>(tp);
+        auto hms = date::hh_mm_ss<std::chrono::seconds>{ tp - tp_days };
+        auto ymd = date::year_month_day{ tp_days };
+
+        time = CreateTime(static_cast<int>(ymd.year()), static_cast<unsigned int>(ymd.month()), static_cast<unsigned int>(ymd.day()),
+            hms.hours().count(), hms.minutes().count(), static_cast<unsigned int>(hms.seconds().count()));
+        return true;
+    }
+
+
 };

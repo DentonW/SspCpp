@@ -36,8 +36,10 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <date/date.h>
 #include <fmt/format.h>
 #include <SspCpp/Cast.h>
+#include "../LatLong.h"
 #include "../StringUtilities.h"
 #include "../TimeStruct.h"
 
@@ -59,7 +61,7 @@ namespace ssp::unb
         {
             int ver = std::stoi(strings[0]);
             if (ver != 2)
-                throw "Invalid version number";
+                throw "Invalid version number (should be 2)";
         }
         catch (std::invalid_argument)
         {
@@ -70,60 +72,105 @@ namespace ssp::unb
     }
 
 
-    bool ParseJulianDay(const std::string& yearStr, const std::string& dayJulianStr, std::string& month, std::string& day)
+    bool ParseDateTime(std::ifstream& inFile, SCast& cast)
     {
-        int dayJulian, year;
-
-        try
-        {
-            dayJulian = std::stoi(dayJulianStr);
-            if (dayJulian < 0 || dayJulian > 366)
-            {
-                std::cout << "Invalid Julian date of " << dayJulianStr << "\n";
-                return false;
-            }
-
-            year = std::stoi(yearStr);
-            if (year < 0)
-            {
-                std::cout << "Invalid year of " << yearStr << "\n";
-                return false;
-            }
-
-        }
-        catch (std::invalid_argument)
-        {
-            std::cout << "Could not parse Julian date\n";
+        std::string line;
+        if (!std::getline(inFile, line))  // Date/time line (usually with comments after #)
             return false;
-        }
+
+        std::istringstream in(line);
+        date::sys_seconds tp;
+        // In format: year julian-day hh:mm:ss
+        in >> date::parse("%Y %j %T", tp);
+        if (!in)
+            return false;  // Error parsing date/time string
+
+        if (!CreateTime(tp, cast.time))
+            return false;
+
+        // The next line has a date/time for logging, but the two examples we have are filled with zeros
+        if (!std::getline(inFile, line))
+            return false;
 
         return true;
     }
 
-    bool ParseDateTime(const std::string& line, SCast& cast)
+
+    bool ParseLatLon(std::ifstream& inFile, SCast& cast)
     {
-        date::parse()
-
-
-        // Example date/time line: "Freitag, 20. Juli 2018 16:54:38"
-        //std::regex rgxDateTime("[a-zA-Z]+[,] ([0-9]+)[.] ([a-zA-Z]+) ([0-9]+) ([0-9]+):([0-9]+):([0-9]+)");
-        std::regex rgxDateTime("([0-9]+) ([0-9]+) ([0-9]+):([0-9]+):([0-9]+)");
-        std::smatch match;
-        std::regex_search(line, match, rgxDateTime);
-        if (match.size() != 6)
+        std::string line;
+        if (!std::getline(inFile, line))  // Lat/lon line
             return false;
 
-        auto year = match[1];
-        auto dayJulian = match[2];
-        auto hour = match[3];
-        auto min = match[4];
-        auto sec = match[5];
-
-        if (!ParseJulianDay)
+        std::stringstream ss(line);
+        ss >> cast.lat;
+        if (!ss)
+            return false;
+        ss >> cast.lon;
+        if (!ss)
             return false;
 
-        if (!CreateTime(year, month, day, hour, min, sec, cast.time))
+        if (!CheckLatLon(cast.lat, cast.lon))
             return false;
+
+        // The next line has a lat/lon for logging, but the two examples we have are filled with zeros
+        if (!std::getline(inFile, line))
+            return false;
+
+        return true;
+    }
+
+
+    // Warning: This function can throw!
+    bool ReadEntries(std::ifstream& inFile, SCast& cast) noexcept(false)
+    {
+        std::string line;
+
+        if (!std::getline(inFile, line))
+            throw "Could not read line";
+        int num;
+        std::stringstream ss(line);
+        ss >> num;
+        if (!ss || num < 1)
+            throw "Could not read number of entries";
+
+        cast.entries.reserve(num);
+
+        // Skip the next 10 lines, which are for future use
+        for (int m = 0; m < 10; ++m)
+        {
+            if (!std::getline(inFile, line))
+                throw "Could not read line";
+        }
+
+        for (int n = 0; n < num; ++n)
+        {
+            if (!std::getline(inFile, line))
+                throw fmt::format("Could not read line #{}", n + 16);
+
+            auto strings = SplitString(line);
+            if (strings.size() == 0 || strings.size() < 7)
+                throw fmt::format("Invalid line #{}", n + 16);
+
+            try
+            {
+                int entryNum = std::stoi(strings[0]);
+                if (entryNum != n+1)  // 1-indexed
+                    throw fmt::format("Invalid entry number on line #{}", n + 16);
+
+                SCastEntry entry;
+                entry.depth = std::stod(strings[1]);
+                entry.c = std::stod(strings[2]);
+                entry.temp = std::stod(strings[3]);
+                entry.salinity = std::stod(strings[4]);
+
+                cast.entries.push_back(entry);
+            }
+            catch (std::invalid_argument)
+            {
+                throw fmt::format("Line #{} could not be parsed", n + 16);
+            }
+        }
 
         return true;
     }
@@ -148,19 +195,22 @@ std::optional<ssp::SCast> ssp::ReadUnb(const std::string& fileName)
     {
         unb::ParseVersion(inFile);
 
-        if (!std::getline(inFile, line))  // Version line (usually with comments after #)
-            throw "Line read failure";
+        if (!unb::ParseDateTime(inFile, cast))
+            throw "Could not parse date/time";
 
-        if (!unb::ParseDateTime(line))
+        if (!unb::ParseLatLon(inFile, cast))
+            throw "Could not parse latitude/longitude";
+
+        if (!unb::ReadEntries(inFile, cast))
+            throw "Could not read entries";
     }
     catch (std::string err)
     {
-        std::cout << "Error reading Unb file (" << fileName << "): " << err << "\n";
+        //std::cout << "Error reading Unb file (" << fileName << "): " << err << "\n";
+        fmt::print("Error reading Unb file ({}): {}\n", fileName, err);
         return {};
     }
 
-    //cast.lat = 0;
-    //cast.lon = 0;
     cast.desc = "University of New Brunswick";
     cast.fileName = fileName;
 

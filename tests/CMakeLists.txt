@@ -21,4 +21,4 @@ add_executable(SspTest ${sources})
 
 set_target_properties(SspTest PROPERTIES CXX_STANDARD 17 OUTPUT_NAME "SspCpp")
 
-target_link_libraries(SspTest SspCpp::SspCpp)
+target_link_libraries(SspTest PRIVATE SspCpp::SspCpp fmt::fmt date::date)

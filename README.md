@@ -19,3 +19,4 @@ These are the currently supported formats, and support for other formats is plan
 * Sea&Sun (.tob)
 * Sea-Bird (.cnv, .tsv)
 * SonarDyne (.pro)
+* University of New Brunswick (.unb)

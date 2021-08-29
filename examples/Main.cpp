@@ -15,6 +15,7 @@ int main()
 
     std::string hyo2 = HYO2_LOC;
 
+
     auto sspAoml1 = ssp::ReadCast(hyo2 + "aoml/_EX1812_AXBT005_181129.txt", ssp::eCastType::Aoml);
     if (!sspAoml1)
         return 1;
@@ -85,6 +86,17 @@ int main()
     //if (!sspSeaBird7)
     //    return 1;
     ////PlotCast(*sspSeaBird7);
+
+
+    // University of New Brunswick
+    auto sspUnb1 = ssp::ReadCast(hyo2 + "unb/_WOD_XBTO1114_4012672.unb", ssp::eCastType::Unb);
+    if (!sspUnb1)
+        return 1;
+
+    auto sspUnb2 = ssp::ReadCast(hyo2 + "unb/_WOD_CTDO1014_3316204.unb", ssp::eCastType::Unb);
+    if (!sspUnb2)
+        return 1;
+
 
     return 0;
 }

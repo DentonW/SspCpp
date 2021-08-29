@@ -129,3 +129,8 @@ packageProject(
   COMPATIBILITY SameMajorVersion
   DEPENDENCIES "fmt 7.1.3;date 3.0.0"
 )
+
+# ---- Make a library distributable package ----
+
+include (CPack)
+set(CPACK_NSIS_DEFINES "RequestExecutionLevel user")

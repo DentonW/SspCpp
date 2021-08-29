@@ -60,3 +60,8 @@ double LatLonToDecimal(int degrees, unsigned int minutes, double seconds);
  * This does no bounds checking. This follows this typical format, where west and south entries are negative.
  */
 bool LatLonFromDecimal(double decimal, double& degrees, double& minutes, double& seconds);
+
+//! Checks whether a given lat/lon is within valid ranges
+bool CheckLatLon(const SLatLong& latlon);
+//! Checks whether a given lat/lon is within valid ranges
+bool CheckLatLon(double lat, double lon);

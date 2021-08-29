@@ -64,12 +64,14 @@ bool ParseCnvTime(std::string header, SCast& cast)
     std::istringstream in(match[1]);
     date::sys_seconds tp;
     in >> date::parse("%b %d %Y %T", tp);
-    auto tp_days = floor<date::days>(tp);
-    auto hms = date::hh_mm_ss<std::chrono::seconds>{ tp - tp_days };
-    auto ymd = date::year_month_day{ tp_days };
-    
-    cast.time = CreateTime(static_cast<int>(ymd.year()), static_cast<unsigned int>(ymd.month()), static_cast<unsigned int>(ymd.day()),
-        hms.hours().count(), hms.minutes().count(), static_cast<unsigned int>(hms.seconds().count()));
+    //auto tp_days = floor<date::days>(tp);
+    //auto hms = date::hh_mm_ss<std::chrono::seconds>{ tp - tp_days };
+    //auto ymd = date::year_month_day{ tp_days };
+    //
+    //cast.time = CreateTime(static_cast<int>(ymd.year()), static_cast<unsigned int>(ymd.month()), static_cast<unsigned int>(ymd.day()),
+    //    hms.hours().count(), hms.minutes().count(), static_cast<unsigned int>(hms.seconds().count()));
+    if (!CreateTime(tp, cast.time))
+        return false;
 
     // To verify that CreateTime worked correctly.
     //std::time_t tt = std::mktime(&cast.time);
