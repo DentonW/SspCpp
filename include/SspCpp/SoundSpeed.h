@@ -46,6 +46,7 @@ namespace ssp
     {
         Aoml,        //!< AOML AMVER-SEAS XBT (.txt)
         Asvp,        //!< Kongsberg Maritime (.asvp)
+        Hypack,      //!< Hypack (.vel)
         SeaAndSun,   //!< Sea&Sun (.tob)
         SeaBirdCnv,  //!< Sea-Bird (.cnv)
         SeaBirdTsv,  //!< Sea-Bird (.tsv)

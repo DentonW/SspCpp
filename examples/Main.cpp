@@ -16,6 +16,14 @@ int main()
     std::string hyo2 = HYO2_LOC;
 
 
+
+    // Hypack
+    auto sspHypack1 = ssp::ReadCast(hyo2 + "hypack/20190819_SV_1549_D.vel", ssp::eCastType::Hypack);
+    if (!sspHypack1)
+        return 1;
+    PlotCast(*sspHypack1);
+
+    // Aoml
     auto sspAoml1 = ssp::ReadCast(hyo2 + "aoml/_EX1812_AXBT005_181129.txt", ssp::eCastType::Aoml);
     if (!sspAoml1)
         return 1;

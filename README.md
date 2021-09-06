@@ -16,6 +16,7 @@ These are the currently supported formats, and support for other formats is plan
 
 * AOML AMVER-SEAS XBT (.txt)
 * Kongsberg Maritime (.asvp)
+* Hypack (.vel)
 * Sea&Sun (.tob)
 * Sea-Bird (.cnv, .tsv)
 * SonarDyne (.pro)

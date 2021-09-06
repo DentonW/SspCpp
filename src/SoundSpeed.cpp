@@ -43,6 +43,7 @@
 
 #include "Readers/Aoml.h"
 #include "Readers/Asvp.h"
+#include "Readers/Hypack.h"
 #include "Readers/SeaAndSun.h"
 #include "Readers/SeaBird.h"
 #include "Readers/Sonardyne.h"
@@ -107,6 +108,9 @@ std::optional<SCast> ReadCast(const std::string& fileName, eCastType type)
 
         case eCastType::Asvp:
             return ReadAsvp(fileName);
+
+        case eCastType::Hypack:
+            return ReadHypack(fileName);
 
         case eCastType::SeaAndSun:
             return ReadSeaAndSun(fileName);

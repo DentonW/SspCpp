@@ -67,6 +67,7 @@ set(headers
     TimeStruct.h
     Readers/Aoml.h
     Readers/Asvp.h
+    Readers/Hypack.h
     Readers/SeaAndSun.h
     Readers/SeaBird.h
     Readers/Sonardyne.h
@@ -80,6 +81,7 @@ set(sources
     SoundSpeed.cpp
     Readers/Aoml.cpp
     Readers/Asvp.cpp
+    Readers/Hypack.cpp
     Readers/SeaAndSun.cpp
     Readers/SeaBird.cpp
     Readers/Sonardyne.cpp
@@ -117,8 +119,8 @@ target_compile_options(SspCpp PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permiss
 target_link_libraries(SspCpp PRIVATE date::date)
 target_link_libraries(SspCpp PUBLIC fmt::fmt)
 
-include(GenerateExportHeader)
-generate_export_header(SspCpp)
+#include(GenerateExportHeader)
+#generate_export_header(SspCpp)
 
 target_include_directories(
   SspCpp PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/../include>

@@ -154,17 +154,21 @@ std::optional<SCast> ReadSeaAndSun(const std::string& fileName)
             if (lineNum == 3)
             {
                 if (!internal::ParseDateTime(line, cast))
-                    throw "Could not parse date/time line";
+                    throw std::string("Could not parse date/time line");
             }
 
             // Lat/lon information
+            if (line.length() < 12)
+                throw std::string("Could not parse lat/lon line");
             if (line.compare(0, 12, "  Position :") == 0)
             {
                 if (!internal::ParseLatLon(line, cast))
-                    throw "Could not parse lat/lon line";
+                    throw std::string("Could not parse lat/lon line");
             }
 
             // Number of SSP entries in the file
+            if (line.length() < 7)
+                throw "Could not parse lat/lon line";
             if (line.compare(0, 7, "Lines :") == 0)  // Line starts with "Lines :"
             {
                 std::stringstream ss(line);
@@ -177,7 +181,7 @@ std::optional<SCast> ReadSeaAndSun(const std::string& fileName)
                 }
                 catch (std::invalid_argument)
                 {
-                    throw "Invalid number of entries string";
+                    throw std::string("Invalid number of entries string");
                 }
 
                 bFound = true;
@@ -186,7 +190,7 @@ std::optional<SCast> ReadSeaAndSun(const std::string& fileName)
         }
 
         if (!bFound)
-            throw "Missing number of entries line";
+            throw std::string("Missing number of entries line");
 
         std::getline(inFile, line);  // Skip - only has a ';'
 
@@ -194,7 +198,7 @@ std::optional<SCast> ReadSeaAndSun(const std::string& fileName)
         auto dataSetVec = SplitString(line);
 
         if (dataSetVec[1] != "Datasets")
-            throw "Data sets not specified";
+            throw std::string("Data sets not specified");
         dataSetVec.erase(begin(dataSetVec), begin(dataSetVec)+2);
 
         int speedPos = -1, pressPos = -1, tempPos = -1, salinPos = -1, condPos = -1, sigmaPos = -1;
@@ -269,7 +273,7 @@ std::optional<SCast> ReadSeaAndSun(const std::string& fileName)
         }
 
         if (entries.size() != numDataLines)
-            throw "Number of entries does not match";
+            throw std::string("Number of entries does not match");
     }
     catch (std::string err)
     {

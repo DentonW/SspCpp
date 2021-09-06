@@ -84,6 +84,4 @@ namespace ssp
             hms.hours().count(), hms.minutes().count(), static_cast<unsigned int>(hms.seconds().count()));
         return true;
     }
-
-
 };
