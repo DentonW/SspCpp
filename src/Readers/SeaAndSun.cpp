@@ -45,7 +45,7 @@ namespace internal
     int Month(std::string month)
     {
         const std::array<std::string, 12> monthsGerman =
-            { "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" };
+            { "Januar", "Februar", "MÃ¤rz", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" };
 
         for (size_t n = 0; n < monthsGerman.size(); ++n)
         {
@@ -120,7 +120,6 @@ namespace internal
             return false;
         }
         return true;
-
     }
 };
 
@@ -223,8 +222,8 @@ std::optional<SCast> ReadSeaAndSun(const std::string& fileName)
         std::getline(inFile, line);
         while (std::regex_search(line, match, rgxUnits))
         {
-            // Different versions of their files can have either degC or °C
-            std::string unit = (match[1] != "degC") ? match[1].str() : "°C";
+            // Different versions of their files can have either degC or Â°C
+            std::string unit = (match[1] != "degC") ? match[1].str() : "Â°C";
             units.push_back(unit);
 
             // Move past the found string to continue searching

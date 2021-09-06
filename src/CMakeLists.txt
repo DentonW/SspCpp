@@ -24,9 +24,22 @@ CPMAddPackage(
   GIT_TAG 8.0.1
   GITHUB_REPOSITORY fmtlib/fmt
   OPTIONS "FMT_INSTALL YES" # create an installable target
+          "BUILD_SHARED_LIBS FALSE"
 )
 
 CPMAddPackage("gh:HowardHinnant/date@3.0.1")
+
+if (SSP_COMPILE_TESTS)
+  CPMAddPackage(
+    NAME googletest
+    GITHUB_REPOSITORY google/googletest
+    GIT_TAG release-1.8.1
+    VERSION 1.8.1
+    OPTIONS
+        "INSTALL_GTEST OFF"
+        "gtest_force_shared_crt ON"
+  )
+endif()
 
 if (SSP_MATPLOTLIB_CPP_SUPPORT)
     # This project appears to be abandoned, so use my fork (has some updates)
@@ -101,7 +114,11 @@ set_target_properties(SspCpp PROPERTIES CXX_STANDARD 17)
 target_compile_options(SspCpp PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
 
 # Link dependencies
-target_link_libraries(SspCpp PRIVATE fmt::fmt date::date)
+target_link_libraries(SspCpp PRIVATE date::date)
+target_link_libraries(SspCpp PUBLIC fmt::fmt)
+
+include(GenerateExportHeader)
+generate_export_header(SspCpp)
 
 target_include_directories(
   SspCpp PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/../include>
@@ -111,8 +128,10 @@ target_include_directories(
 
 if (SSP_MATPLOTLIB_CPP_SUPPORT)
     message(STATUS "matplotlib-cpp support on")
+    find_package (Python COMPONENTS Development)
     target_compile_definitions(SspCpp PRIVATE SSP_MATPLOTLIB_CPP_SUPPORT)
     target_link_libraries(SspCpp PRIVATE matplotlib_cpp)
+    target_link_libraries(SspCpp PUBLIC Python::Python)
     target_include_directories(SspCpp PRIVATE ${matplotlib_cpp_SOURCE_DIR})
 else()
     message(STATUS "matplotlib-cpp support off")
