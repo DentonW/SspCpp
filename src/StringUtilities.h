@@ -30,6 +30,7 @@
 #pragma once
 
 #include <algorithm>
+#include <filesystem>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -76,5 +77,21 @@ namespace ssp
             return true;
         else
             return false;
+    }
+
+    //! Gets the filename extension (with leading .)
+    inline std::string GetExtension(std::string fileName)
+    {
+        return std::filesystem::path(fileName).extension().string();
+    }
+
+    //! Converts an ASCII string to its lowercase equivalent
+    inline std::string Lowercase(std::string s)
+    {
+        // From https://stackoverflow.com/questions/313970/how-to-convert-an-instance-of-stdstring-to-lower-case
+        //  Will fail on UTF-8 data, since this operates per-byte.
+        std::transform(s.begin(), s.end(), s.begin(),
+            [](unsigned char c) { return std::tolower(c); });
+        return s;
     }
 };

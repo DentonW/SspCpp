@@ -48,6 +48,7 @@ namespace ssp
 
     struct SCast
     {
+        SCast() { lat = 0; lon = 0; time.tm_hour = 0; time.tm_min = 0; time.tm_sec = 0; time.tm_year = 0; time.tm_mon = 0; time.tm_mday = 0; }
         std::string desc;  //!< Description of type of file read from
         std::string fileName;  //!< Filename of this cast
         std::vector<SCastEntry> entries;

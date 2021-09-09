@@ -41,6 +41,7 @@
 #include <SspCpp/ProcessChecks.h>
 #include <SspCpp/SoundSpeed.h>
 
+#include "StringUtilities.h"
 #include "Readers/Aoml.h"
 #include "Readers/Asvp.h"
 #include "Readers/Hypack.h"
@@ -98,6 +99,34 @@ bool PlotCast(const SCast& cast)
 #endif
 
 
+//! Simply determines the file type based on the filename extension
+eCastType DetermineFileType(const std::string& fileName)
+{
+    std::string ext = GetExtension(fileName);
+    if (ext == "")  // No extension found
+        return eCastType::Unknown;
+
+    ext = Lowercase(ext);
+
+    // Unfortunately, AOML is in .txt files
+    if (fileName == ".asvp")
+        return eCastType::Asvp;
+    if (fileName == ".vel")
+        return eCastType::Hypack;
+    if (fileName == ".tob")
+        return eCastType::SeaAndSun;
+    if (fileName == ".cnv")
+        return eCastType::SeaBirdCnv;
+    if (fileName == ".tsv")
+        return eCastType::SeaBirdTsv;
+    if (fileName == ".pro")
+        return eCastType::Sonardyne;
+    if (fileName == ".unb")
+        return eCastType::Unb;
+
+    return eCastType::Unknown;
+}
+
 
 std::optional<SCast> ReadCast(const std::string& fileName, eCastType type)
 {
@@ -129,8 +158,16 @@ std::optional<SCast> ReadCast(const std::string& fileName, eCastType type)
 
         case eCastType::Unknown:  // Fallthrough
         default:
-            std::cout << "No support for determining SSP file types\n";
-            break;
+        {
+            //std::cout << "No support for determining SSP file types\n";
+            eCastType type = DetermineFileType(fileName);
+            if (type == eCastType::Unknown)
+            {
+                std::cout << "Could not determine SSP file type from " << fileName << "\n";
+                return {};
+            }
+            return ReadCast(fileName, type);
+        }
     }
 
     return {};
