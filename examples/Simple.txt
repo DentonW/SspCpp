@@ -1,4 +1,9 @@
--1.2 1530
+# A sample comment
+   # Another sample comment but with spaces at the beginning
+	# Final comment with a tab at beginning
+% Different type of comment
+// Final type of comment
+-.2 1530
 .9 1530.8
 1. 1531.
 1 1531.755

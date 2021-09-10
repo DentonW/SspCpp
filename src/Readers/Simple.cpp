@@ -34,7 +34,7 @@
 #include <regex>
 #include <fmt/format.h>
 #include <SspCpp/SoundSpeed.h>
-
+#include "StringUtilities.h"
 
 
 std::optional<ssp::SCast> ssp::ReadSimple(const std::string& fileName)
@@ -55,8 +55,12 @@ std::optional<ssp::SCast> ssp::ReadSimple(const std::string& fileName)
     {
         ++lineNum;
 
-        if (!std::getline(inFile, line))  // Header
+        if (!std::getline(inFile, line))
             break;
+        std::string trimmed = ltrim(line);
+        if (StartsWith(trimmed, "#") || StartsWith(trimmed, "%") || StartsWith(trimmed, "//"))  // Comment line
+            continue;
+
         if (line.size() == 0)
             break;
 
@@ -67,11 +71,12 @@ std::optional<ssp::SCast> ssp::ReadSimple(const std::string& fileName)
         std::smatch match;
 
         std::array<double,2> vals;
-        for (int n = 0; n < 2 && std::regex_search(line, match, rgx); ++n)
+        for (int n = 0; n < 2; ++n)
         {
-            if (match.size() < 2)
+
+            if (!std::regex_search(line, match, rgx) || match.size() < 2)
             {
-                fmt::print("Could not parse line #{}\n", lineNum);
+                fmt::print("Could not parse line #{} of {}\n", lineNum, fileName);
                 return {};
             }
 
@@ -81,7 +86,7 @@ std::optional<ssp::SCast> ssp::ReadSimple(const std::string& fileName)
             }
             catch (std::invalid_argument)
             {
-                fmt::print("Could not parse line #{}\n", lineNum);
+                fmt::print("Could not parse line #{} of {}\n", lineNum, fileName);
                 return {};
             }
 
