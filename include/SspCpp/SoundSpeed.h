@@ -50,6 +50,7 @@ namespace ssp
         SeaAndSun,   //!< Sea&Sun (.tob)
         SeaBirdCnv,  //!< Sea-Bird (.cnv)
         SeaBirdTsv,  //!< Sea-Bird (.tsv)
+        Simple,      //!< Simple text-based (depth and sound speed only for each line)
         Sonardyne,   //!< SonarDyne (.pro)
         Unb,         //!< University of New Brunswick (.unb)
         Unknown      //!< Does nothing currently - will try to determine file format in the future

@@ -47,6 +47,7 @@
 #include "Readers/Hypack.h"
 #include "Readers/SeaAndSun.h"
 #include "Readers/SeaBird.h"
+#include "Readers/Simple.h"
 #include "Readers/Sonardyne.h"
 #include "Readers/Unb.h"
 
@@ -149,6 +150,9 @@ std::optional<SCast> ReadCast(const std::string& fileName, eCastType type)
 
         case eCastType::SeaBirdTsv:
             return ReadSeaBirdTsv(fileName);
+
+        case eCastType::Simple:
+            return ReadSimple(fileName);
 
         case eCastType::Sonardyne:
             return ReadSonardyne(fileName);

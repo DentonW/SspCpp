@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 # Note: update this to your new project's name and version
 project(
   SspCpp
-  VERSION 1.4.2
+  VERSION 1.6.0
   DESCRIPTION "SspCpp: Sound Speed Profile Library"
   HOMEPAGE_URL https://github.com/DentonW/SspCpp
   LANGUAGES CXX
@@ -70,6 +70,7 @@ set(headers
     Readers/Hypack.h
     Readers/SeaAndSun.h
     Readers/SeaBird.h
+    Readers/Simple.h
     Readers/Sonardyne.h
     Readers/Unb.h
 )
@@ -84,6 +85,7 @@ set(sources
     Readers/Hypack.cpp
     Readers/SeaAndSun.cpp
     Readers/SeaBird.cpp
+    Readers/Simple.cpp
     Readers/Sonardyne.cpp
     Readers/Unb.cpp
 )

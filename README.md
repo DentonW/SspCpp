@@ -21,3 +21,4 @@ These are the currently supported formats, and support for other formats is plan
 * Sea-Bird (.cnv, .tsv)
 * SonarDyne (.pro)
 * University of New Brunswick (.unb)
+* A simple text-based format
