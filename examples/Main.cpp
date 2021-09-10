@@ -16,11 +16,11 @@ int main()
     std::string hyo2 = HYO2_LOC;
 
 
-    // Simple
-    auto sspSimple = ssp::ReadCast("F:/Coding/SoundSpeed/SoundSpeed/examples/Simple.txt", ssp::eCastType::Simple);
-    if (!sspSimple)
-        return 1;
-    PlotCast(*sspSimple);
+    //// Simple
+    //auto sspSimple = ssp::ReadCast("examples/Simple.txt", ssp::eCastType::Simple);
+    //if (!sspSimple)
+    //    return 1;
+    //PlotCast(*sspSimple);
 
     // Hypack
     auto sspHypack1 = ssp::ReadCast(hyo2 + "hypack/20190819_SV_1549_D.vel", ssp::eCastType::Hypack);
