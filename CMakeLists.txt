@@ -21,11 +21,15 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
 endif()
 
 
+# Add the cmake folder so the FindSphinx module is found
+set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+
 # ---- Set options ----
 # (Needed before CPM calls)
 option(SSP_MATPLOTLIB_CPP_SUPPORT "Use matplotlib-cpp for plotting" OFF)
 option(SSP_COMPILE_EXAMPLES "Compile example programs" ON)
 option(SSP_COMPILE_TESTS "Compile test programs" OFF)
+option(SSP_BUILD_DOCS "Build Doxygen+Sphinx documentation" OFF)
 
 
 add_subdirectory(src/)
@@ -34,4 +38,8 @@ if (SSP_COMPILE_EXAMPLES)
 endif()
 if (SSP_COMPILE_TESTS)
     add_subdirectory(tests/)
+endif()
+
+if (SSP_BUILD_DOCS)
+	add_subdirectory ("docs")
 endif()
