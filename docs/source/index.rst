@@ -10,6 +10,8 @@ SspCpp Documentation
    :maxdepth: 2
    :caption: Contents:
 
+   models
+
 
 :math:`ax^2 + bx + c`
 
