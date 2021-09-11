@@ -168,3 +168,22 @@ packageProject(
 
 include (CPack)
 set(CPACK_NSIS_DEFINES "RequestExecutionLevel user")
+
+# ---- Group external projects in Visual Studio ----
+if (MSVC)
+    if (TARGET fmt)
+        set_target_properties(fmt PROPERTIES FOLDER Externals/gmock)
+    endif()
+    if (TARGET gmock)
+        set_target_properties(gmock PROPERTIES FOLDER Externals/gmock)
+    endif()
+    if (TARGET gmock_main)
+        set_target_properties(gmock_main PROPERTIES FOLDER Externals/gmock)
+    endif()
+    if (TARGET gtest)
+        set_target_properties(gtest PROPERTIES FOLDER Externals/gmock)
+    endif()
+    if (TARGET gtest_main)
+        set_target_properties(gtest_main PROPERTIES FOLDER Externals/gmock)
+    endif()
+endif()

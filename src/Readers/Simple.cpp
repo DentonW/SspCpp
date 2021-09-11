@@ -24,7 +24,10 @@
 
  /*!
   * \file   Simple.cpp
-  * \brief  
+  * \brief  Reads in a simple text-based SSP with depth and sound speed on each line
+  * 
+  * This file can have whitespace and delimiters in the lines (space, tab, commas, semicolons,
+  * etc.). If a line starts with #, %, or //, it is considered to be a comment line and ignored.
   */
 
 #include "pch.h"
@@ -66,7 +69,8 @@ std::optional<ssp::SCast> ssp::ReadSimple(const std::string& fileName)
 
         // Can be either an integer or a decimal number. The "(?:[+-]?[0-9]*[.])?" is a non-capture group,
         //  with the last ? indicating that it is optional. The "[0-9]+" at the end indicates that this
-        //  must have at least a set of digits.
+        //  must have at least a set of digits. The "[+-]?" at the beginning gives that the number could have
+        //  an optional + or - at the beginning.
         std::regex rgx("([+-]?(?:[0-9]*[.])?[0-9]+)");
         std::smatch match;
 
