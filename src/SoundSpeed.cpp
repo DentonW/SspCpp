@@ -110,19 +110,19 @@ eCastType DetermineFileType(const std::string& fileName)
     ext = Lowercase(ext);
 
     // Unfortunately, AOML is in .txt files
-    if (fileName == ".asvp")
+    if (ext == ".asvp")
         return eCastType::Asvp;
-    if (fileName == ".vel")
+    if (ext == ".vel")
         return eCastType::Hypack;
-    if (fileName == ".tob")
+    if (ext == ".tob")
         return eCastType::SeaAndSun;
-    if (fileName == ".cnv")
+    if (ext == ".cnv")
         return eCastType::SeaBirdCnv;
-    if (fileName == ".tsv")
+    if (ext == ".tsv")
         return eCastType::SeaBirdTsv;
-    if (fileName == ".pro")
+    if (ext == ".pro")
         return eCastType::Sonardyne;
-    if (fileName == ".unb")
+    if (ext == ".unb")
         return eCastType::Unb;
 
     return eCastType::Unknown;
