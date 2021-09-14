@@ -93,3 +93,18 @@ TEST_CASE("Latitude-longitude conversions", "[lat-long]")
 
     return;
 }
+
+
+
+TEST_CASE("Conductivity to salinity", "[salinity]")
+{
+    // Values from referenced paper, pages 13-14
+    REQUIRE(ssp::ConductivityToSalinity(1.0 * 4.2914, 0, 15) == Approx(35.0));
+    REQUIRE(ssp::ConductivityToSalinity(0.6990725 * 4.2914, 0, 0) == Approx(36.2864));
+    REQUIRE(ssp::ConductivityToSalinity(0.6990725 * 4.2914, 0, 10) == Approx(26.8609));
+    REQUIRE(ssp::ConductivityToSalinity(0.6990725 * 4.2914, 0, 20) == Approx(20.8085));
+    REQUIRE(ssp::ConductivityToSalinity(1.165120 * 4.2914, 1000, 20) == Approx(36.3576));
+    REQUIRE(ssp::ConductivityToSalinity(1.3981451 * 4.2914, 2000, 30) == Approx(35.5783));
+
+    return;
+}
