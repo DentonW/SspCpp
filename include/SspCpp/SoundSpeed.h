@@ -84,4 +84,16 @@ namespace ssp
     double DepthToPressure(double depth, double latitudeDeg);
 
     double PascalToBar(double pascals);
+
+    /*!
+     * \brief Converts conductivity measurement to salinity
+     *
+     * Conversion created from "Algorithms for computation of fundamental properties of seawater"
+     * Unesco report by N.P. Fofonoff and R.C. Millard Jr. (1983). http://dx.doi.org/10.25607/OBP-1450
+     * \param[in] conductivitySm Conductivity in Siemens/meter
+     * \param[in] pressureDbar Pressure in decibars
+     * \param[in] tempC Temperature in degrees Celsius
+     * \returns Conductivity in parts per thousand
+     */
+    double ConductivityToSalinity(double conductivitySm, double pressureDbar, double tempC);
 };
