@@ -171,6 +171,8 @@ set(CPACK_NSIS_DEFINES "RequestExecutionLevel user")
 
 # ---- Group external projects in Visual Studio ----
 if (MSVC)
+    set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
     if (TARGET fmt)
         set_target_properties(fmt PROPERTIES FOLDER Externals/gmock)
     endif()
