@@ -45,6 +45,7 @@
 #include "Readers/Aoml.h"
 #include "Readers/Asvp.h"
 #include "Readers/Hypack.h"
+#include "Readers/Oceanscience.h"
 #include "Readers/SeaAndSun.h"
 #include "Readers/SeaBird.h"
 #include "Readers/Simple.h"
@@ -114,6 +115,8 @@ eCastType DetermineFileType(const std::string& fileName)
         return eCastType::Asvp;
     if (ext == ".vel")
         return eCastType::Hypack;
+    if (ext == ".asc")
+        return eCastType::Oceanscience;
     if (ext == ".tob")
         return eCastType::SeaAndSun;
     if (ext == ".cnv")
@@ -141,6 +144,9 @@ std::optional<SCast> ReadCast(const std::string& fileName, eCastType type)
 
         case eCastType::Hypack:
             return ReadHypack(fileName);
+
+        case eCastType::Oceanscience:
+            return ReadOceanscience(fileName);
 
         case eCastType::SeaAndSun:
             return ReadSeaAndSun(fileName);

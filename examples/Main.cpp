@@ -7,8 +7,8 @@
 
 int main()
 {
-    double pDbar = 10.1325;  // 1 atm
-    std::cout << ssp::Depth(pDbar, 0) << "\n";
+    double pBar = 1.01325;  // 1 atm
+    std::cout << ssp::Depth(pBar, 0) << "\n";
     std::cout << ssp::DepthToPressure(100, 0.0) << "\n";  // ~10.04 bar (gives 100.6 dbar)
     std::cout << ssp::DepthToPressure(200, 0.0) << "\n";  // ~20.08 bar (gives 201.2 dbar)
     std::cout << ssp::DepthToPressure(305, 0.0) << "\n";  // ~30.62 bar (gives 306.9 dbar)

@@ -249,20 +249,17 @@ std::optional<SCast> ReadSeaAndSun(const std::string& fileName)
                 throw fmt::format("Incomplete line #{}", lineNum);
             }
 
-            entry.depth = lineNum;  /// @todo: Just for testing! Remove and calculate!
-
             try
             {
                 entry.c = std::stod(entryVec[speedPos]);
                 entry.temp = std::stod(entryVec[tempPos]);
                 entry.salinity = std::stod(entryVec[salinPos]);
-                double pressure = std::stod(entryVec[pressPos]);
-                entry.pressure = pressure / 10;  // decibar to bar
+                entry.pressure = std::stod(entryVec[pressPos]) / 10;  // decibar to bar
 
                 // The depth has to be calculated
                 double sigma = std::stod(entryVec[sigmaPos]);
                 double density = 1000 + sigma;  // https://en.wikipedia.org/wiki/Sigma-t
-                entry.depth = Depth(pressure, cast.lat);
+                entry.depth = Depth(entry.pressure, cast.lat);
             }
             catch (std::invalid_argument)
             {

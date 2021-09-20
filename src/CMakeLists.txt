@@ -68,6 +68,7 @@ set(headers
     Readers/Aoml.h
     Readers/Asvp.h
     Readers/Hypack.h
+    Readers/Oceanscience.h
     Readers/SeaAndSun.h
     Readers/SeaBird.h
     Readers/Simple.h
@@ -83,6 +84,7 @@ set(sources
     Readers/Aoml.cpp
     Readers/Asvp.cpp
     Readers/Hypack.cpp
+    Readers/Oceanscience.cpp
     Readers/SeaAndSun.cpp
     Readers/SeaBird.cpp
     Readers/Simple.cpp
@@ -157,7 +159,7 @@ packageProject(
   VERSION ${PROJECT_VERSION}
   NAMESPACE ${PROJECT_NAME}
   BINARY_DIR ${PROJECT_BINARY_DIR}
-  INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
+  INCLUDE_DIR ${PROJECT_SOURCE_DIR}/../include
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
   COMPATIBILITY SameMajorVersion

@@ -51,11 +51,11 @@ double Gravity(double latitudeDeg)
 }
 
 
-double Depth(double pressureDBar, double latitudeDeg)
+double Depth(double pressureBar, double latitudeDeg)
 {
     const double g = Gravity(latitudeDeg);
 
-    double P = pressureDBar * 0.01;  // Decibar to MegaPascal
+    double P = pressureBar * 0.1;  // Bars to MegaPascal
     double Z = 9.72659e2 * P - 2.2512e-1 * P*P + 2.279e-4 * P*P*P - 1.82e-7 * P*P*P*P;
     Z /= (g + 1.092e-4 * P);
 
@@ -74,7 +74,7 @@ double DepthToPressure(double depth, double latitudeDeg)
     double k = (g - 2e-5 * z) / (9.80612 - 2e-5 * z);
 
     double p = hZ45 * k;  // In MegaPascals
-    p *= 100.0;  // Convert using 1 Mpa = 100 decibars
+    p *= 10.0;  // Convert using 1 Mpa = 10 bars
     return p;
 }
 

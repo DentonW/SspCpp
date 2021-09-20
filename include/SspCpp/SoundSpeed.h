@@ -36,24 +36,25 @@
 
 #define SSP_WORLD_VERSION 1
 #define SSP_MAJOR_VERSION 6
-#define SSP_MINOR_VERSION 2
-#define SSP_STRING_VERSION "1.6.2"
+#define SSP_MINOR_VERSION 3
+#define SSP_STRING_VERSION "1.6.3"
 
 namespace ssp
 {
     //! 
     enum class eCastType
     {
-        Aoml,        //!< AOML AMVER-SEAS XBT (.txt)
-        Asvp,        //!< Kongsberg Maritime (.asvp)
-        Hypack,      //!< Hypack (.vel)
-        SeaAndSun,   //!< Sea&Sun (.tob)
-        SeaBirdCnv,  //!< Sea-Bird (.cnv)
-        SeaBirdTsv,  //!< Sea-Bird (.tsv)
-        Simple,      //!< Simple text-based (depth and sound speed only for each line)
-        Sonardyne,   //!< SonarDyne (.pro)
-        Unb,         //!< University of New Brunswick (.unb)
-        Unknown      //!< Does nothing currently - will try to determine file format in the future
+        Aoml,         //!< AOML AMVER-SEAS XBT (.txt)
+        Asvp,         //!< Kongsberg Maritime (.asvp)
+        Hypack,       //!< Hypack (.vel)
+        Oceanscience, //!< Oceanscience (.asc)
+        SeaAndSun,    //!< Sea&Sun (.tob)
+        SeaBirdCnv,   //!< Sea-Bird (.cnv)
+        SeaBirdTsv,   //!< Sea-Bird (.tsv)
+        Simple,       //!< Simple text-based (depth and sound speed only for each line)
+        Sonardyne,    //!< SonarDyne (.pro)
+        Unb,          //!< University of New Brunswick (.unb)
+        Unknown       //!< Does nothing currently - will try to determine file format in the future
     };
 
     std::optional<SCast> ReadCast(const std::string& fileName, eCastType type = eCastType::Unknown);
@@ -76,10 +77,10 @@ namespace ssp
     /*! From Leroy and Parthiot, "Depth-pressure relationships in the oceans and seas"
      *   https://doi.org/10.1121/1.421275
      */
-    double Depth(double pressureDBar, double latitudeDeg);
+    double Depth(double pressureBar, double latitudeDeg);
 
     /*! From Leroy and Parthiot, "Depth-pressure relationships in the oceans and seas"
-     *   https://doi.org/10.1121/1.421275. Returns pressure in decibars (instead of MegaPascals as in the paper).
+     *   https://doi.org/10.1121/1.421275. Returns pressure in bars (instead of MegaPascals as in the paper).
      */
     double DepthToPressure(double depth, double latitudeDeg);
 
