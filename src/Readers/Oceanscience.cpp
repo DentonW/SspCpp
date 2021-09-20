@@ -31,7 +31,7 @@
 #include "Oceanscience.h"
 #include <date/date.h>
 #include <SspCpp/SoundSpeed.h>
-#include "LatLong.h"
+#include <SspCpp/LatLong.h>
 #include "TimeStruct.h"
 
 
@@ -61,7 +61,7 @@ std::optional<ssp::SCast> ssp::ReadOceanscience(const std::string& fileName)
             continue;
         if (line[0] == '*')
         {
-            Check for date/time and lat/lon
+            std::cout << "Need to check for date/time and lat/lon\n";
             continue;
         }
 

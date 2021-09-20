@@ -36,8 +36,8 @@
 
 #define SSP_WORLD_VERSION 1
 #define SSP_MAJOR_VERSION 6
-#define SSP_MINOR_VERSION 3
-#define SSP_STRING_VERSION "1.6.3"
+#define SSP_MINOR_VERSION 4
+#define SSP_STRING_VERSION "1.6.4"
 
 namespace ssp
 {

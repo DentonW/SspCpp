@@ -7,4 +7,4 @@ authors:
 license: MIT
 title: "SspCpp: A C++ Underwater Sound Speed Profile File Reader Library"
 url: "https://github.com/DentonW/SspCpp"
-version: 1.6.3
+version: 1.6.4
