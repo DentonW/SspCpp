@@ -5,8 +5,8 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 # Note: update this to your new project's name and version
 project(
   SspCpp-Main
-  VERSION 1.6.4
-  DESCRIPTION "Sound Speed Profile Library"
+  VERSION 1.7.0
+  DESCRIPTION "Sound Speed Profile Library (SspCpp)"
   HOMEPAGE_URL https://github.com/DentonW/SspCpp
   LANGUAGES CXX
 )

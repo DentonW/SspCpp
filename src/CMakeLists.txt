@@ -131,6 +131,7 @@ target_include_directories(
   SspCpp PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/../include>
                  $<INSTALL_INTERFACE:include/${PROJECT_NAME}-${PROJECT_VERSION}>
          PRIVATE ${PROJECT_SOURCE_DIR}
+                $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}>
 )
 
 if (SSP_MATPLOTLIB_CPP_SUPPORT)
@@ -154,6 +155,8 @@ endif()
 # the location where the project's version header will be placed should match the project's regular
 # header paths
 string(TOLOWER ${PROJECT_NAME}/version.h VERSION_HEADER_LOCATION)
+
+install(FILES ${PROJECT_BINARY_DIR}/sspcpp_export.h DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}/sspcpp)
 
 packageProject(
   NAME ${PROJECT_NAME}

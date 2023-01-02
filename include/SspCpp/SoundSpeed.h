@@ -33,11 +33,12 @@
 #include <string>
 #include "Cast.h"
 #include "ProcessChecks.h"
+#include "sspcpp_export.h"
 
 #define SSP_WORLD_VERSION 1
-#define SSP_MAJOR_VERSION 6
-#define SSP_MINOR_VERSION 4
-#define SSP_STRING_VERSION "1.6.4"
+#define SSP_MAJOR_VERSION 7
+#define SSP_MINOR_VERSION 0
+#define SSP_STRING_VERSION "1.7.0"
 
 namespace ssp
 {
@@ -70,9 +71,9 @@ namespace ssp
      *  Salinity: [0, 40] parts per thousand (ppt)
      *  Pressure: [0, 1000] bar
      */
-    double WongZhu(double temp, double salin, double pressure);
+    double SSPCPP_EXPORT WongZhu(double temp, double salin, double pressure);
 
-    double Gravity(double latitudeDeg);
+    double SSPCPP_EXPORT Gravity(double latitudeDeg);
 
     /*! From Leroy and Parthiot, "Depth-pressure relationships in the oceans and seas"
      *   https://doi.org/10.1121/1.421275

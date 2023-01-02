@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project(SspExample LANGUAGES CXX)
+#project(SspExample LANGUAGES CXX)
 
 # --- Import tools ----
 
@@ -39,3 +39,7 @@ set(HYO2_LOC "${FETCHCONTENT_BASE_DIR}/hyo2_soundspeed-src/data/input/")
 #     "#pragma once\n\nconst char* HYO2_LOC = \"${HYO2_LOC}\";\n"
 #)
 target_compile_definitions(SspExample PRIVATE HYO2_LOC="${HYO2_LOC}")
+
+target_include_directories(
+  SspExample PRIVATE ${PROJECT_BINARY_DIR} ${PROJECT_BINARY_DIR}/src
+)
