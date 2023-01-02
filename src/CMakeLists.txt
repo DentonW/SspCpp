@@ -131,7 +131,7 @@ target_compile_definitions(SspCpp PUBLIC SSPCPP_EXPORTS)
 
 # Link dependencies
 target_link_libraries(SspCpp PRIVATE date::date)
-target_link_libraries(SspCpp PRIVATE fmt::fmt-header-only)
+target_link_libraries(SspCpp PRIVATE $<BUILD_INTERFACE:fmt::fmt-header-only>)
 
 target_include_directories(
   SspCpp PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
@@ -188,7 +188,7 @@ if (MSVC)
     set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
     if (TARGET fmt)
-        set_target_properties(fmt PROPERTIES FOLDER Externals/gmock)
+        set_target_properties(fmt PROPERTIES FOLDER Externals)
     endif()
     if (TARGET gmock)
         set_target_properties(gmock PROPERTIES FOLDER Externals/gmock)
