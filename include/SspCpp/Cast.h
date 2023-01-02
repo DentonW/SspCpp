@@ -32,10 +32,12 @@
 #include <ctime>
 #include <string>
 #include <vector>
+#include "sspcpp_export.h"
+
 
 namespace ssp
 {
-    struct SCastEntry
+    struct SSPCPP_EXPORT SCastEntry
     {
         SCastEntry() { depth = 0; c = 0; temp = 0; salinity = 0; pressure = 0; absorp = 0; }
         double depth;  //!< Depth in meters
@@ -46,7 +48,7 @@ namespace ssp
         double absorp;  //!< Absorption /// @todo: Do any casts typically have this?
     };
 
-    struct SCast
+    struct SSPCPP_EXPORT SCast
     {
         SCast() { lat = 0; lon = 0; time.tm_hour = 0; time.tm_min = 0; time.tm_sec = 0; time.tm_year = 0; time.tm_mon = 0; time.tm_mday = 0; }
         std::string desc;  //!< Description of type of file read from

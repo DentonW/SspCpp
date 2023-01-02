@@ -34,41 +34,42 @@
 
 #include "LatLong.h"
 #include "Cast.h"
+#include "sspcpp_export.h"
 
 
 namespace ssp
 {
-    void Reorder(SCast& cast);
-    void RemoveNegativeDepths(SCast& cast);
-    void RemoveNegativeSpeeds(SCast& cast);
+    SSPCPP_EXPORT void Reorder(SCast& cast);
+    SSPCPP_EXPORT void RemoveNegativeDepths(SCast& cast);
+    SSPCPP_EXPORT void RemoveNegativeSpeeds(SCast& cast);
 
     /*! Removes entries with the same depth
      *
      * This is relatively dumb, as it does strict comparison. We may want to switch to a percent difference threshold test.
      */
-    void RemoveDuplicateDepths(SCast& cast);
+    SSPCPP_EXPORT void RemoveDuplicateDepths(SCast& cast);
 
     //! Checks whether latitude/longitude values are within valid ranges
-    bool CheckLatLon(double lat, double lon);
+    SSPCPP_EXPORT bool CheckLatLon(double lat, double lon);
     //! Checks whether latitude/longitude values are within valid ranges
-    bool CheckLatLon(const SLatLong& latlon);
+    SSPCPP_EXPORT bool CheckLatLon(const SLatLong& latlon);
     //! Checks whether latitude/longitude values are within valid ranges
-    bool CheckLatLon(SCast& cast);
+    SSPCPP_EXPORT bool CheckLatLon(SCast& cast);
 
     //! Checks whether the sound speed is within physically valid ranges
-    bool CheckSoundSpeed(double c);
+    SSPCPP_EXPORT bool CheckSoundSpeed(double c);
 
     //! Checks whether the depth fits within the ocean depth limits
-    bool CheckDepth(double depth);
+    SSPCPP_EXPORT bool CheckDepth(double depth);
 
     //! Checks whether the depth is monotonically increasing
-    bool CheckDepthIncreasing(const std::vector<SCastEntry>& cast);
+    SSPCPP_EXPORT bool CheckDepthIncreasing(const std::vector<SCastEntry>& cast);
 
     //! Checks whether cast values are within proper limits (no negative values and values physically reasonable)
-    bool CheckLimits(const SCast& cast);
+    SSPCPP_EXPORT bool CheckLimits(const SCast& cast);
 
     //! Checks whether single cast sample is within proper limits (no negative values and values physically reasonable)
-    bool CheckLimits(const SCastEntry& entry);
+    SSPCPP_EXPORT bool CheckLimits(const SCastEntry& entry);
 
-    bool Cleanup(SCast& cast);
+    SSPCPP_EXPORT bool Cleanup(SCast& cast);
 };

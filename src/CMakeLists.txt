@@ -3,13 +3,13 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 # ---- Project ----
 
 # Note: update this to your new project's name and version
-project(
-  SspCpp
-  VERSION 1.6.0
-  DESCRIPTION "SspCpp: Sound Speed Profile Library"
-  HOMEPAGE_URL https://github.com/DentonW/SspCpp
-  LANGUAGES CXX
-)
+#project(
+#  SspCpp
+#  VERSION 1.7.0
+#  DESCRIPTION "SspCpp: Sound Speed Profile Library"
+#  HOMEPAGE_URL https://github.com/DentonW/SspCpp
+#  LANGUAGES CXX
+#)
 
 # ---- Add dependencies via CPM ----
 # see https://github.com/TheLartians/CPM.cmake for more info
@@ -23,7 +23,7 @@ CPMAddPackage(
   NAME fmt
   GIT_TAG 8.0.1
   GITHUB_REPOSITORY fmtlib/fmt
-  OPTIONS "FMT_INSTALL YES" # create an installable target
+  OPTIONS "FMT_INSTALL NO" # create an installable target
           "BUILD_SHARED_LIBS FALSE"
 )
 
@@ -109,15 +109,21 @@ endif()
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
 # target: add_library(Greeter INTERFACE)
-add_library(SspCpp ${headers} ${sources})
+if (SSPCPP_BUILD_SHARED_LIBS)
+    add_library(SspCpp SHARED ${headers} ${sources})
+else(SSPCPP_BUILD_SHARED_LIBS)
+    add_library(SspCpp STATIC ${headers} ${sources})
+endif(SSPCPP_BUILD_SHARED_LIBS)
 
 # Add precompiled header support
 target_precompile_headers(SspCpp PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/pch.h>")
 
-set_target_properties(SspCpp PROPERTIES CXX_STANDARD 17)
-
-include(GenerateExportHeader)
-generate_export_header(SspCpp)
+set_target_properties(SspCpp PROPERTIES
+    CXX_STANDARD 17
+    ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib"
+    LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib"
+    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin"
+)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(SspCpp PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
@@ -128,10 +134,11 @@ target_link_libraries(SspCpp PRIVATE date::date)
 target_link_libraries(SspCpp PRIVATE fmt::fmt-header-only)
 
 target_include_directories(
-  SspCpp PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/../include>
-                 $<INSTALL_INTERFACE:include/${PROJECT_NAME}-${PROJECT_VERSION}>
+  SspCpp PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+                 $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
          PRIVATE ${PROJECT_SOURCE_DIR}
                 $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}>
+                $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>
 )
 
 if (SSP_MATPLOTLIB_CPP_SUPPORT)
@@ -156,18 +163,18 @@ endif()
 # header paths
 string(TOLOWER ${PROJECT_NAME}/version.h VERSION_HEADER_LOCATION)
 
-install(FILES ${PROJECT_BINARY_DIR}/sspcpp_export.h DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}/sspcpp)
+install(FILES ${PROJECT_BINARY_DIR}/sspcpp_export.h DESTINATION include/${PROJECT_NAME}/sspcpp)
 
 packageProject(
   NAME ${PROJECT_NAME}
   VERSION ${PROJECT_VERSION}
   NAMESPACE ${PROJECT_NAME}
   BINARY_DIR ${PROJECT_BINARY_DIR}
-  INCLUDE_DIR ${PROJECT_SOURCE_DIR}/../include
-  INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
-  VERSION_HEADER "${VERSION_HEADER_LOCATION}"
+  INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
+  INCLUDE_DESTINATION include/${PROJECT_NAME}
+  #VERSION_HEADER "${VERSION_HEADER_LOCATION}"
   COMPATIBILITY SameMajorVersion
-  DEPENDENCIES "fmt 7.1.3"
+  #DEPENDENCIES "fmt 7.1.3"
   #DEPENDENCIES "fmt 7.1.3;date 3.0.0"
 )
 

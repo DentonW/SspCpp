@@ -40,6 +40,7 @@
 #define SSP_MINOR_VERSION 0
 #define SSP_STRING_VERSION "1.7.0"
 
+
 namespace ssp
 {
     //! 
@@ -58,9 +59,9 @@ namespace ssp
         Unknown       //!< Does nothing currently - will try to determine file format in the future
     };
 
-    std::optional<SCast> ReadCast(const std::string& fileName, eCastType type = eCastType::Unknown);
+    SSPCPP_EXPORT std::optional<SCast> ReadCast(const std::string& fileName, eCastType type = eCastType::Unknown);
 
-    bool PlotCast(const ssp::SCast& cast);
+    SSPCPP_EXPORT bool PlotCast(const ssp::SCast& cast);
 
 
     /*!
@@ -71,21 +72,21 @@ namespace ssp
      *  Salinity: [0, 40] parts per thousand (ppt)
      *  Pressure: [0, 1000] bar
      */
-    double SSPCPP_EXPORT WongZhu(double temp, double salin, double pressure);
+    SSPCPP_EXPORT double WongZhu(double temp, double salin, double pressure);
 
-    double SSPCPP_EXPORT Gravity(double latitudeDeg);
+    SSPCPP_EXPORT double Gravity(double latitudeDeg);
 
     /*! From Leroy and Parthiot, "Depth-pressure relationships in the oceans and seas"
      *   https://doi.org/10.1121/1.421275
      */
-    double Depth(double pressureBar, double latitudeDeg);
+    SSPCPP_EXPORT double Depth(double pressureBar, double latitudeDeg);
 
     /*! From Leroy and Parthiot, "Depth-pressure relationships in the oceans and seas"
      *   https://doi.org/10.1121/1.421275. Returns pressure in bars (instead of MegaPascals as in the paper).
      */
-    double DepthToPressure(double depth, double latitudeDeg);
+    SSPCPP_EXPORT double DepthToPressure(double depth, double latitudeDeg);
 
-    double PascalToBar(double pascals);
+    SSPCPP_EXPORT double PascalToBar(double pascals);
 
     /*!
      * \brief Converts conductivity measurement to salinity
@@ -97,5 +98,5 @@ namespace ssp
      * \param[in] tempC Temperature in degrees Celsius
      * \returns Conductivity in parts per thousand
      */
-    double ConductivityToSalinity(double conductivitySm, double pressureDbar, double tempC);
+    SSPCPP_EXPORT double ConductivityToSalinity(double conductivitySm, double pressureDbar, double tempC);
 };

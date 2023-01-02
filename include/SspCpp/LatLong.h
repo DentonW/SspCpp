@@ -29,6 +29,8 @@
 
 #pragma once
 
+#include "sspcpp_export.h"
+
 
 namespace ssp
 {
@@ -55,13 +57,13 @@ namespace ssp
      * This does no bounds checking. All values other than degrees must be positive. This follows this typical
      * format, where west and south entries are negative.
      */
-    double LatLonToDecimal(int degrees, unsigned int minutes, double seconds);
+    SSPCPP_EXPORT double LatLonToDecimal(int degrees, unsigned int minutes, double seconds);
 
     /*!
      * \brief Converts latitude or longitude from its decimal values to deg:min:sec format
      *
      * This does no bounds checking. This follows this typical format, where west and south entries are negative.
      */
-    bool LatLonFromDecimal(double decimal, double& degrees, double& minutes, double& seconds);
+    SSPCPP_EXPORT bool LatLonFromDecimal(double decimal, double& degrees, double& minutes, double& seconds);
 
 };  // End namespace ssp

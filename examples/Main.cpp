@@ -48,10 +48,11 @@ int main()
     Cleanup(*sspSeaBird7);
     PlotCast(*sspSeaBird7);
 
+    // This one does not load
     auto sspSeaSun1 = ssp::ReadCast(hyo2 + "seaandsun/1608240753.TOB", ssp::eCastType::SeaAndSun);
-    if (!sspSeaSun1)
-        return 1;
-    PlotCast(*sspSeaSun1);
+    //if (!sspSeaSun1)
+    //    return 1;
+    //PlotCast(*sspSeaSun1);
 
     auto sspAsvp1 = ssp::ReadCast(hyo2 + "asvp/_20120321_224205.asvp", ssp::eCastType::Asvp);
     if (!sspAsvp1)
