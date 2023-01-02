@@ -32,7 +32,7 @@ add_executable(SspExample ${sources})
 
 set_target_properties(SspExample PROPERTIES
 	CXX_STANDARD 17
-	OUTPUT_NAME "SspCpp"
+	OUTPUT_NAME "SspExample"
     ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib"
     LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib"
     RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin"
@@ -46,6 +46,6 @@ set(HYO2_LOC "${FETCHCONTENT_BASE_DIR}/hyo2_soundspeed-src/data/input/")
 #)
 target_compile_definitions(SspExample PRIVATE HYO2_LOC="${HYO2_LOC}")
 
-target_include_directories(
-  SspExample PRIVATE ${PROJECT_BINARY_DIR} ${PROJECT_BINARY_DIR}/src
-)
+#target_include_directories(
+#  SspExample PRIVATE ${PROJECT_BINARY_DIR} ${PROJECT_BINARY_DIR}/src
+#)

@@ -37,5 +37,5 @@ if (SSP_COMPILE_TESTS)
     add_subdirectory(tests/)
 endif()
 
-include(GenerateExportHeader)
-generate_export_header(SspCpp)
+#include(GenerateExportHeader)
+#generate_export_header(SspCpp)

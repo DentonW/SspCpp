@@ -48,6 +48,9 @@ namespace ssp
         double absorp;  //!< Absorption /// @todo: Do any casts typically have this?
     };
 
+#pragma warning(push)
+#pragma warning(disable : 4251)  // Warning about using std::vector
+
     struct SSPCPP_EXPORT SCast
     {
         SCast() { lat = 0; lon = 0; time.tm_hour = 0; time.tm_min = 0; time.tm_sec = 0; time.tm_year = 0; time.tm_mon = 0; time.tm_mday = 0; }
@@ -58,4 +61,5 @@ namespace ssp
         double lat;  //!< Latitude
         double lon;  //!< Longitude
     };
+#pragma warning(pop)
 };

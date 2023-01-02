@@ -62,6 +62,7 @@ set(headers
     ../include/SspCpp/LatLong.h
     ../include/SspCpp/ProcessChecks.h
     ../include/SspCpp/SoundSpeed.h
+    ../include/SspCpp/sspcpp_export.h
     #../README.md
     StringUtilities.h
     TimeStruct.h
@@ -109,11 +110,11 @@ endif()
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
 # target: add_library(Greeter INTERFACE)
-if (SSPCPP_BUILD_SHARED_LIBS)
+if (SSP_BUILD_SHARED_LIBS)
     add_library(SspCpp SHARED ${headers} ${sources})
-else(SSPCPP_BUILD_SHARED_LIBS)
+else(SSP_BUILD_SHARED_LIBS)
     add_library(SspCpp STATIC ${headers} ${sources})
-endif(SSPCPP_BUILD_SHARED_LIBS)
+endif(SSP_BUILD_SHARED_LIBS)
 
 # Add precompiled header support
 target_precompile_headers(SspCpp PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/pch.h>")
@@ -135,10 +136,10 @@ target_link_libraries(SspCpp PRIVATE $<BUILD_INTERFACE:fmt::fmt-header-only>)
 
 target_include_directories(
   SspCpp PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-                 $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
+                $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
          PRIVATE ${PROJECT_SOURCE_DIR}
+                ${PROJECT_SOURCE_DIR}/src
                 $<BUILD_INTERFACE:${PROJECT_BINARY_DIR}>
-                $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>
 )
 
 if (SSP_MATPLOTLIB_CPP_SUPPORT)
@@ -162,8 +163,6 @@ endif()
 # the location where the project's version header will be placed should match the project's regular
 # header paths
 string(TOLOWER ${PROJECT_NAME}/version.h VERSION_HEADER_LOCATION)
-
-install(FILES ${PROJECT_BINARY_DIR}/sspcpp_export.h DESTINATION include/${PROJECT_NAME}/sspcpp)
 
 packageProject(
   NAME ${PROJECT_NAME}

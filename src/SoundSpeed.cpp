@@ -71,7 +71,7 @@ T max_vec(const std::vector<T>& v)
 
 
 #ifdef SSP_MATPLOTLIB_CPP_SUPPORT
-bool PlotCast(const SCast& cast)
+SSPCPP_EXPORT bool PlotCast(const SCast& cast)
 {
     namespace plt = matplotlibcpp;
 
