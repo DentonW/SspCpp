@@ -17,8 +17,9 @@ project(SspExample LANGUAGES CXX)
 include(FetchContent)
 FetchContent_Declare(
   hyo2_soundspeed
-  URL      https://github.com/hydroffice/hyo2_soundspeed/archive/refs/tags/v.2021.2.2.zip
-  URL_HASH MD5=1b5c4c8c5c1893ed1cde475852cace51
+  #URL      https://github.com/hydroffice/hyo2_soundspeed/archive/refs/tags/v.2021.2.2.zip
+  URL      https://github.com/hydroffice/hyo2_soundspeed/archive/refs/tags/v.2022.2.13.zip
+  #URL_HASH MD5=1b5c4c8c5c1893ed1cde475852cace51
 )
 FetchContent_MakeAvailable(hyo2_soundspeed)
 

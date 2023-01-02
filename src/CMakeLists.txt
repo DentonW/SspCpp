@@ -116,15 +116,16 @@ target_precompile_headers(SspCpp PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURR
 
 set_target_properties(SspCpp PROPERTIES CXX_STANDARD 17)
 
+include(GenerateExportHeader)
+generate_export_header(SspCpp)
+
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(SspCpp PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
+target_compile_definitions(SspCpp PUBLIC SSPCPP_EXPORTS)
 
 # Link dependencies
 target_link_libraries(SspCpp PRIVATE date::date)
-target_link_libraries(SspCpp PUBLIC fmt::fmt)
-
-#include(GenerateExportHeader)
-#generate_export_header(SspCpp)
+target_link_libraries(SspCpp PRIVATE fmt::fmt-header-only)
 
 target_include_directories(
   SspCpp PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/../include>
@@ -163,7 +164,8 @@ packageProject(
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
   COMPATIBILITY SameMajorVersion
-  DEPENDENCIES "fmt 7.1.3;date 3.0.0"
+  DEPENDENCIES "fmt 7.1.3"
+  #DEPENDENCIES "fmt 7.1.3;date 3.0.0"
 )
 
 # ---- Make a library distributable package ----
