@@ -30,13 +30,16 @@ set(sources Main.cpp)
 
 add_executable(SspExample ${sources})
 
-set_target_properties(SspExample PROPERTIES
-	CXX_STANDARD 17
-	OUTPUT_NAME "SspExample"
-    ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib"
-    LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib"
-    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin"
-)
+set_target_properties(SspExample PROPERTIES	CXX_STANDARD 17)
+# If not being used as a library by another project, put the shared library and example executable in the same folder.
+if (PROJECT_IS_TOP_LEVEL)
+    set_target_properties(SspExample PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib"
+        LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib"
+        RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin"
+    )
+endif()
+
 
 target_link_libraries(SspExample PUBLIC SspCpp::SspCpp)
 

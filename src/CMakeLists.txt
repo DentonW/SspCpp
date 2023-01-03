@@ -119,12 +119,15 @@ endif(SSP_BUILD_SHARED_LIBS)
 # Add precompiled header support
 target_precompile_headers(SspCpp PRIVATE "$<$<COMPILE_LANGUAGE:CXX>:${CMAKE_CURRENT_SOURCE_DIR}/pch.h>")
 
-set_target_properties(SspCpp PROPERTIES
-    CXX_STANDARD 17
-    ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib"
-    LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib"
-    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin"
-)
+set_target_properties(SspCpp PROPERTIES CXX_STANDARD 17)
+# If not being used as a library by another project, put the shared library and example executable in the same folder.
+if (PROJECT_IS_TOP_LEVEL)
+    set_target_properties(SspCpp PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib"
+        LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/lib"
+        RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/bin"
+    )
+endif()
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(SspCpp PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive->")
